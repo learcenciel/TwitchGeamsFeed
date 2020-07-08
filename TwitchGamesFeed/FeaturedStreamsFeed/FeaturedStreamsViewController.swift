@@ -12,11 +12,12 @@ import SnapKit
 import UIKit
 
 class FeaturedStreamsViewController: UIViewController {
-
-    private lazy var featuredStreamsCollectionView: UICollectionView = {
-        let streamsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        streamsCollectionView.backgroundColor = .clear
-        return streamsCollectionView
+    
+    private lazy var featuredStreamsTableView: UITableView = {
+        let featuredStreamsTableView = UITableView()
+        featuredStreamsTableView.backgroundColor = .clear
+        featuredStreamsTableView.separatorStyle = .none
+        return featuredStreamsTableView
     }()
     
     var featuredStreamsViewModel: FeaturedStreamsViewModel?
@@ -51,10 +52,6 @@ class FeaturedStreamsViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    deinit {
-        print("DEINIT VC")
-    }
-    
     // MARK: Views configure methods
     
     private func configureBindings() {
@@ -63,24 +60,23 @@ class FeaturedStreamsViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .bind(to: self.featuredStreams)
         
-        disposeBag += featuredStreams.bind(to: featuredStreamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: TwitchFeaturedStreamCell.self)) { row, featuredStream, cell in
+        disposeBag += featuredStreams.bind(to: featuredStreamsTableView.rx.items(cellIdentifier: "cellId", cellType: TwitchFeaturedStreamCell.self)) { row, featuredStream, cell in
             cell.featuredStream = featuredStream
         }
         
-        disposeBag += featuredStreamsCollectionView.rx.modelSelected(FeaturedResponse.self)
-            .share(replay: 1, scope: .whileConnected)
-            .subscribe(onNext: { [weak self] stream in
-            self?.featuredStreamsViewModel?.featuredStreamTapped.onNext(stream)
-        })
+        disposeBag += featuredStreamsTableView.rx.modelSelected(FeaturedResponse.self)
+            .subscribe(onNext: { [unowned self] stream in
+                self.featuredStreamsViewModel?.featuredStreamTapped.onNext(stream)
+            })
         
         disposeBag += featuredStreamsViewModel?.error.subscribe(onNext: { error in
             print(error)
         })
-        
-        disposeBag += featuredStreamsCollectionView.rx.contentOffset
-            .skip(1)
+            
+        disposeBag += featuredStreamsTableView.rx.contentOffset
+            .skip(3)
             .subscribe(onNext: { [unowned self] offset in
-                if self.featuredStreamsCollectionView.isNearBottomEdge(edgeOffset: 20) && !self.featuredStreamsViewModel!.isLoading {
+                if self.featuredStreamsTableView.isNearBottomEdge(edgeOffset: 20) && !self.featuredStreamsViewModel!.isLoading {
                     self.featuredStreamsViewModel!.isLoading = true
                     self.featuredStreamsViewModel?.fetchNextGamesList()
                 }
@@ -88,24 +84,19 @@ class FeaturedStreamsViewController: UIViewController {
     }
     
     func configureStreamsCollectionView() {
-        self.view.addSubview(featuredStreamsCollectionView)
+        self.view.addSubview(featuredStreamsTableView)
         
-        featuredStreamsCollectionView.showsVerticalScrollIndicator = false
-        featuredStreamsCollectionView.showsHorizontalScrollIndicator = false
+        featuredStreamsTableView.showsVerticalScrollIndicator = false
+        featuredStreamsTableView.showsHorizontalScrollIndicator = false
         
-        featuredStreamsCollectionView.snp.makeConstraints { make in
+        featuredStreamsTableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
         
-        featuredStreamsCollectionView.register(TwitchFeaturedStreamCell.self, forCellWithReuseIdentifier: "cellId")
-        
-        let layout = featuredStreamsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: view.frame.width - 48, height: view.frame.height * 0.3)
-        layout.sectionInset = UIEdgeInsets(top: 24, left: 0, bottom: 24, right: 0)
-        layout.minimumLineSpacing = 10
-        layout.scrollDirection = .vertical
+        featuredStreamsTableView.register(TwitchFeaturedStreamCell.self, forCellReuseIdentifier: "cellId")
+        featuredStreamsTableView.rowHeight = UITableView.automaticDimension
     }
 }

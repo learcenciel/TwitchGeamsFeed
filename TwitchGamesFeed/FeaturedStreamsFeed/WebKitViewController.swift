@@ -33,10 +33,6 @@ class WebKitViewController: UIViewController {
         }
     }
     
-    deinit {
-        print("DEINIT WEKBIT")
-    }
-    
     private func configureNavigationBar() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.tintColor = .white
@@ -48,7 +44,10 @@ class WebKitViewController: UIViewController {
     }
     
     private func loadUrl() {
-        let url = URL(string: "https://www.twitch.tv/\(streamUrl)")!
+        guard
+            let url = URL(string: "https://www.twitch.tv/\(streamUrl)")
+        else { return }
+        
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
     }

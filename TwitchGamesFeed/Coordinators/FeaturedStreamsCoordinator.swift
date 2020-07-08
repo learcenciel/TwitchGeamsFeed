@@ -26,10 +26,6 @@ class FeaturedStreamsCoordinator: NSObject, Coordinator {
         self.featuredStreamsViewModel = featuredStreamsViewModel
     }
     
-    deinit {
-        print("DEINIT COORDINATOR")
-    }
-    
     func start() {
         self.navigationController?.delegate = self
         self.featuredStreamsViewController.featuredStreamsViewModel = self.featuredStreamsViewModel

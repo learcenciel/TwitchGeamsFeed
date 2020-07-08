@@ -13,6 +13,7 @@ import UIKit
 
 enum SlideMenuItemType: String, CaseIterable {
     case featuredStreams = "Featured Streams"
+    case favoriteGames = "Favorite Games"
     case search = "Search"
     case aboutApp = "About App"
 }
@@ -53,6 +54,8 @@ class TopGamesFeedCoordinator: Coordinator {
                 let featuredStreamsCoordinator: FeaturedStreamsCoordinator = *self.container
                 featuredStreamsCoordinator.navigationController = self.navigationController
                 self.start(coordinator: featuredStreamsCoordinator)
+            case .favoriteGames:
+                break
             case .aboutApp:
                 break
             case .search:

@@ -42,10 +42,6 @@ class FeaturedStreamsViewModel {
             }
         }
     }
-    
-    deinit {
-        print("DEINIT VIEWMODEL")
-    }
 
     func fetchNextGamesList() {
         self.loading.onNext(true)

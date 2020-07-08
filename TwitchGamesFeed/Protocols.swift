@@ -28,9 +28,7 @@ extension Coordinator {
     
     func didFinish(coordinator: Coordinator) {
         if let index = self.childCoordinators.firstIndex(where: { $0 === coordinator }) {
-            print(self.childCoordinators.count)
             self.childCoordinators.remove(at: index)
-            print(self.childCoordinators.count)
         }
     }
 }
