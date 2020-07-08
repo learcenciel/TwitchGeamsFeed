@@ -12,7 +12,11 @@ import RxRelay
 
 class FeaturedStreamsViewModel {
     
-    private let apiManager = TwitchAPI(httpClient: HTTPClient())
+    private let apiManager: TwitchAPI
+    
+    init(apiManager: TwitchAPI) {
+        self.apiManager = apiManager
+    }
     
     enum FeaturedStreamsFeedError {
         case parseError(String)

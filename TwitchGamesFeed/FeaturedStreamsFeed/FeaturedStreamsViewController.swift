@@ -6,8 +6,8 @@
 //  Copyright © 2020 Alexander Team. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 import SnapKit
 import UIKit
 

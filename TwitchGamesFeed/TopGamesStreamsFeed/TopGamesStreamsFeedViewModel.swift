@@ -7,12 +7,16 @@
 //
 
 import Foundation
-import RxSwift
 import RxRelay
+import RxSwift
 
 class TopGamesStreamsFeedViewModel {
     
-    private let apiManager = TwitchAPI(httpClient: HTTPClient())
+    private let apiManager: TwitchAPI
+    
+    init(apiManager: TwitchAPI) {
+        self.apiManager = apiManager
+    }
     
     enum TopGamesStreamsFeedError {
         case parseError(String)

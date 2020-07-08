@@ -15,5 +15,8 @@ class TopGamesStreamsFeedDIPart: DIPart {
         
         container.register(TopGamesStreamsFeedViewModel.init)
             .lifetime(.prototype)
+        
+        container.register(TwitchAPI.init)
+        container.register(HTTPClient.init)
     }
 }
