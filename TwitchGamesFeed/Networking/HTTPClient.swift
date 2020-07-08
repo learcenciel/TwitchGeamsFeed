@@ -25,26 +25,27 @@ class HTTPClient {
     func get<T: Decodable>(url: String,
                            parameters: [String: Any]?, completionHandler: @escaping(Result<T, HTTPErrors>) -> Void) {
         var queryParameters = HTTPClient.commonParameters
-
+        
         if let parameters = parameters {
             for key in parameters.keys {
                 queryParameters[key] = parameters[key]
             }
         }
         
-        AF.request(url, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: HTTPClient.headers).validate().responseData { data in
-            switch data.result {
-            case .success(let responseData):
-                do {
-                    let jsonDecoder = JSONDecoder()
-                    let decodedResponseData = try jsonDecoder.decode(T.self, from: responseData)
-                    completionHandler(.success(decodedResponseData))
-                } catch {
-                    completionHandler(.failure(.parsingError))
+        AF.request(url, method: .get, parameters: parameters, headers: HTTPClient.headers)
+            .responseData { data in
+                switch data.result {
+                case .failure(let err):
+                    print(err)
+                case .success(let responseData):
+                    do {
+                        let jsonDecoder = JSONDecoder()
+                        let decodedResponseData = try jsonDecoder.decode(T.self, from: responseData)
+                        completionHandler(.success(decodedResponseData))
+                    } catch {
+                        completionHandler(.failure(.parsingError))
+                    }
                 }
-            case .failure:
-                completionHandler(.failure(.parsingError))
-            }
         }
     }
 }

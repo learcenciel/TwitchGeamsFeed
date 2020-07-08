@@ -25,7 +25,8 @@ class TwitchGameCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        titleLabel.numberOfLines = 1
+        titleLabel.numberOfLines = 3
+        titleLabel.textColor = .white
         titleLabel.textAlignment = .left
         return titleLabel
     }()
@@ -35,6 +36,7 @@ class TwitchGameCell: UICollectionViewCell {
         viewersCountLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         viewersCountLabel.numberOfLines = 1
         viewersCountLabel.textAlignment = .left
+        viewersCountLabel.textColor = .white
         viewersCountLabel.text = "91,5k viewers"
         return viewersCountLabel
     }()
@@ -44,6 +46,7 @@ class TwitchGameCell: UICollectionViewCell {
         gameTagLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         gameTagLabel.numberOfLines = 1
         gameTagLabel.textAlignment = .left
+        gameTagLabel.textColor = .white
         gameTagLabel.text = "First person Shooter"
         return gameTagLabel
     }()
@@ -57,6 +60,11 @@ class TwitchGameCell: UICollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.posterImageView.image = nil
+        self.titleLabel.text = ""
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
@@ -83,7 +91,6 @@ class TwitchGameCell: UICollectionViewCell {
         containerView.layer.cornerRadius = 18
         containerView.clipsToBounds = true
         containerView.backgroundColor = UIColor(red: 85/255, green: 26/255, blue: 173/255, alpha: 1.0)
-        
         containerView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -97,7 +104,7 @@ class TwitchGameCell: UICollectionViewCell {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(posterImageView.snp.top).offset(24)
+            make.top.equalTo(posterImageView.snp.top).offset(16)
             make.leading.equalTo(posterImageView.snp.trailing).offset(14)
             make.trailing.lessThanOrEqualTo(containerView.snp.trailing).offset(-14)
         }

@@ -22,4 +22,18 @@ class TwitchAPI {
                        parameters: parameters,
                        completionHandler: completionHandler)
     }
+    
+    func fetchNextTopGames(parameters: [String: Any]?,
+                             completionHandler: @escaping(Result<TwitchResponse, HTTPErrors>) -> Void) {
+        httpClient.get(url: "https://api.twitch.tv/helix/games/top",
+                       parameters: parameters,
+                       completionHandler: completionHandler)
+    }
+    
+    func fetchFeaturedStreams(parameters: [String: Any]?,
+                             completionHandler: @escaping(Result<TwitchFeaturedStream, HTTPErrors>) -> Void) {
+        httpClient.get(url: "https://api.twitch.tv/helix/streams",
+                       parameters: parameters,
+                       completionHandler: completionHandler)
+    }
 }

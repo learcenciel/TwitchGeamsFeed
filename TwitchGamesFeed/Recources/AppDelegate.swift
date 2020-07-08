@@ -6,6 +6,7 @@
 //  Copyright © 2020 Alexander Team. All rights reserved.
 //
 
+import DITranquillity
 import UIKit
 
 @UIApplicationMain
@@ -14,9 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = TopGamesStreamsFeedViewController()
-        window?.makeKeyAndVisible()
+        
+        let container = DIContainer()
+        container.append(framework: AppFramework.self)
+        
+        if container.validate(checkGraphCycles: true) == false {
+            fatalError()
+        }
+        
+        container.initializeSingletonObjects()
+        
+        let appCoordinator: AppCoordinator = container.resolve()
+        appCoordinator.start()
         return true
     }
 }

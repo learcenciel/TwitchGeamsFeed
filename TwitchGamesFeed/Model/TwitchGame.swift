@@ -10,9 +10,11 @@ import Foundation
 
 struct TwitchResponse: Decodable {
     let data: [TwitchGame]
+    let pagination: Pagination
     
     private enum CodingKeys: String, CodingKey {
         case data = "data"
+        case pagination = "pagination"
     }
 }
 
@@ -25,5 +27,13 @@ struct TwitchGame: Decodable {
         case id = "id"
         case name = "name"
         case posterPathUrl = "box_art_url"
+    }
+}
+
+struct Pagination: Decodable {
+    let cursor: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case cursor = "cursor"
     }
 }

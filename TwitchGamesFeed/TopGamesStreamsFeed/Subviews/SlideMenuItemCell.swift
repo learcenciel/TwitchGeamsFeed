@@ -16,6 +16,7 @@ class SlideMenuItemCell: UITableViewCell {
     let menuItemLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .white
         return label
     }()
     
