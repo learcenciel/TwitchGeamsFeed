@@ -1,8 +1,8 @@
 //
-//  TwitchFeaturedStreamCell2.swift
+//  TwitchStreamCell.swift
 //  TwitchGamesFeed
 //
-//  Created by Alexander on 08.07.2020.
+//  Created by Alexander on 10.07.2020.
 //  Copyright © 2020 Alexander Team. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Nuke
 import SnapKit
 import UIKit
 
-class TwitchFeaturedStreamCell: UITableViewCell {
+class TwitchStreamCell: UITableViewCell {
     
     private let liveTitleView: PosterImageViewBaseView = {
         let liveTitleView = PosterImageViewBaseView()
@@ -62,14 +62,14 @@ class TwitchFeaturedStreamCell: UITableViewCell {
     
     //private let gameTagLabel = TwitchFeaturedStreamTagView()
     
-    var featuredStream: FeaturedResponse! {
+    var featuredStream: TwitchStreamInfo! {
         didSet {
             let prepString = featuredStream.thumbnailUrl.replacingOccurrences(of: "{width}x{height}", with: "720x1136")
             guard let url = URL(string: prepString) else { return }
             Nuke.loadImage(with: url, into: posterImageView)
-            titleLabel.text = featuredStream.streamTitle
+            titleLabel.text = featuredStream.title
             viewersCountLabel.labelTitle = String(featuredStream.viewerCount)
-            gameTagLabel.labelTitle = featuredStream.streamLanguage.uppercased()
+            gameTagLabel.labelTitle = featuredStream.language.uppercased()
         }
     }
     
@@ -153,4 +153,3 @@ class TwitchFeaturedStreamCell: UITableViewCell {
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
 }
-

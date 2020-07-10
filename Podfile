@@ -12,4 +12,5 @@ target 'TwitchGamesFeed' do
   pod 'Alamofire'
   pod 'Nuke'
   pod 'DITranquillity'
+  pod 'NVActivityIndicatorView'
 end

@@ -12,6 +12,6 @@ public class AppFramework: DIFramework {
     public static func load(container: DIContainer) {
         container.append(part: CoordinatorDIPart.self)
         container.append(part: TopGamesStreamsFeedDIPart.self)
-        container.append(part: FeaturedStreamsDIPart.self)
+        container.append(part: TwitchStreamsFeedDIPart.self)
     }
 }

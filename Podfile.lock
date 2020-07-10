@@ -3,6 +3,9 @@ PODS:
   - DITranquillity (3.9.3):
     - SwiftLazy
   - Nuke (9.1.1)
+  - NVActivityIndicatorView (5.0.0):
+    - NVActivityIndicatorView/Base (= 5.0.0)
+  - NVActivityIndicatorView/Base (5.0.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -16,6 +19,7 @@ DEPENDENCIES:
   - Alamofire
   - DITranquillity
   - Nuke
+  - NVActivityIndicatorView
   - RxCocoa
   - RxSwift
   - SnapKit
@@ -25,6 +29,7 @@ SPEC REPOS:
     - Alamofire
     - DITranquillity
     - Nuke
+    - NVActivityIndicatorView
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -35,12 +40,13 @@ SPEC CHECKSUMS:
   Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
   DITranquillity: 7aba075b73dbb1f321a1218dd3d9f1bd5ad9427b
   Nuke: af4301b154d3afd8a3b045a5194a9a773a00b7a8
+  NVActivityIndicatorView: f109ed069924ac1b4adbc1ae9cfaeac0be1d6c2c
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLazy: dcb1edc6c2b633ba2e68f28554d9dd6d1c0bfd13
 
-PODFILE CHECKSUM: 2495ecfd292a7ec54cfbf270edeecab02727cf14
+PODFILE CHECKSUM: d3ca8b62d1382fb94bd400b86c3d957c7b1adfe5
 
 COCOAPODS: 1.8.3

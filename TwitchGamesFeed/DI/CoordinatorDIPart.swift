@@ -17,7 +17,7 @@ class CoordinatorDIPart: DIPart {
         container.register(TopGamesFeedCoordinator.init)
             .lifetime(.prototype)
         
-        container.register(FeaturedStreamsCoordinator.init)
+        container.register(TwitchStreamsFeedCoordinator.init)
             .lifetime(.prototype)
     }
 }

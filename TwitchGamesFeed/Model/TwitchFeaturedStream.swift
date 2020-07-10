@@ -18,6 +18,14 @@ struct TwitchFeaturedStream: Decodable {
     }
 }
 
+struct Pagination: Decodable {
+    let cursor: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case cursor = "cursor"
+    }
+}
+
 struct FeaturedResponse: Decodable {
     let userName: String
     let streamLanguage: String

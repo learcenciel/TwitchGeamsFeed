@@ -51,9 +51,9 @@ class TopGamesFeedCoordinator: Coordinator {
         self.topGamesFeedViewModel.featuredStreamsItemMenuTapped.subscribe(onNext: { [unowned self] slideMenuItemType in
             switch slideMenuItemType {
             case .featuredStreams:
-                let featuredStreamsCoordinator: FeaturedStreamsCoordinator = *self.container
-                featuredStreamsCoordinator.navigationController = self.navigationController
-                self.start(coordinator: featuredStreamsCoordinator)
+                let twitchStreamsFeedCoordinator: TwitchStreamsFeedCoordinator = *self.container
+                twitchStreamsFeedCoordinator.navigationController = self.navigationController
+                self.start(coordinator: twitchStreamsFeedCoordinator)
             case .favoriteGames:
                 break
             case .aboutApp:

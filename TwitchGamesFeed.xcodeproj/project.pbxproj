@@ -12,14 +12,16 @@
 		203644B724B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203644B624B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift */; };
 		203644B924B1DF7400C31BC9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203644B824B1DF7400C31BC9 /* Protocols.swift */; };
 		203644BD24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203644BC24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift */; };
-		2037665124B6233400A7089F /* TwitchFeaturedStreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037665024B6233400A7089F /* TwitchFeaturedStreamCell.swift */; };
 		2037665324B6314800A7089F /* PosterImageViewBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037665224B6314800A7089F /* PosterImageViewBaseView.swift */; };
-		2042D9B424B37820007C8E5E /* FeaturedStreamsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042D9B324B3781F007C8E5E /* FeaturedStreamsCoordinator.swift */; };
-		2042D9B824B378EA007C8E5E /* FeaturedStreamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042D9B724B378EA007C8E5E /* FeaturedStreamsViewController.swift */; };
 		2042D9BA24B3793D007C8E5E /* UIScrollView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042D9B924B3793D007C8E5E /* UIScrollView + Extensions.swift */; };
-		2042D9BC24B379A6007C8E5E /* FeaturedStreamsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042D9BB24B379A6007C8E5E /* FeaturedStreamsViewModel.swift */; };
 		2042D9BE24B37A11007C8E5E /* TwitchFeaturedStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042D9BD24B37A11007C8E5E /* TwitchFeaturedStream.swift */; };
-		2042D9C324B37DFA007C8E5E /* FeaturedStreamsDIPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042D9C224B37DFA007C8E5E /* FeaturedStreamsDIPart.swift */; };
+		204831CC24B8C93300361B50 /* TwitchStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831CB24B8C93300361B50 /* TwitchStream.swift */; };
+		204831CF24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831CE24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift */; };
+		204831D224B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D124B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift */; };
+		204831D424B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D324B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift */; };
+		204831D624B8CFD200361B50 /* TwitchStreamsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D524B8CFD200361B50 /* TwitchStreamsFeedViewController.swift */; };
+		204831D824B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D724B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift */; };
+		204831DB24B8D18100361B50 /* TwitchStreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831DA24B8D18100361B50 /* TwitchStreamCell.swift */; };
 		20893A5A24B240E2006A8964 /* Rx + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20893A5924B240E2006A8964 /* Rx + Extensions.swift */; };
 		20EF34D524B11AC30082FA67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF34D424B11AC30082FA67 /* AppDelegate.swift */; };
 		20EF34DE24B11AC50082FA67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20EF34DD24B11AC50082FA67 /* Assets.xcassets */; };
@@ -43,14 +45,16 @@
 		203644B624B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesStreamsFeedDIPart.swift; sourceTree = "<group>"; };
 		203644B824B1DF7400C31BC9 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		203644BC24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesFeedCoordinator.swift; sourceTree = "<group>"; };
-		2037665024B6233400A7089F /* TwitchFeaturedStreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchFeaturedStreamCell.swift; sourceTree = "<group>"; };
 		2037665224B6314800A7089F /* PosterImageViewBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageViewBaseView.swift; sourceTree = "<group>"; };
-		2042D9B324B3781F007C8E5E /* FeaturedStreamsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedStreamsCoordinator.swift; sourceTree = "<group>"; };
-		2042D9B724B378EA007C8E5E /* FeaturedStreamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedStreamsViewController.swift; sourceTree = "<group>"; };
 		2042D9B924B3793D007C8E5E /* UIScrollView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView + Extensions.swift"; sourceTree = "<group>"; };
-		2042D9BB24B379A6007C8E5E /* FeaturedStreamsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedStreamsViewModel.swift; sourceTree = "<group>"; };
 		2042D9BD24B37A11007C8E5E /* TwitchFeaturedStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchFeaturedStream.swift; sourceTree = "<group>"; };
-		2042D9C224B37DFA007C8E5E /* FeaturedStreamsDIPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedStreamsDIPart.swift; sourceTree = "<group>"; };
+		204831CB24B8C93300361B50 /* TwitchStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStream.swift; sourceTree = "<group>"; };
+		204831CE24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedViewModel.swift; sourceTree = "<group>"; };
+		204831D124B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedModelConverter.swift; sourceTree = "<group>"; };
+		204831D324B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedDIPart.swift; sourceTree = "<group>"; };
+		204831D524B8CFD200361B50 /* TwitchStreamsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedViewController.swift; sourceTree = "<group>"; };
+		204831D724B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedCoordinator.swift; sourceTree = "<group>"; };
+		204831DA24B8D18100361B50 /* TwitchStreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamCell.swift; sourceTree = "<group>"; };
 		20893A5924B240E2006A8964 /* Rx + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx + Extensions.swift"; sourceTree = "<group>"; };
 		20EF34D124B11AC30082FA67 /* TwitchGamesFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitchGamesFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20EF34D424B11AC30082FA67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,7 +94,7 @@
 				203644B024B1D32100C31BC9 /* AppFramework.swift */,
 				203644B424B1D37600C31BC9 /* CoordinatorDIPart.swift */,
 				203644B624B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift */,
-				2042D9C224B37DFA007C8E5E /* FeaturedStreamsDIPart.swift */,
+				204831D324B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -105,21 +109,30 @@
 			path = Recources;
 			sourceTree = "<group>";
 		};
-		2042D9B624B378CA007C8E5E /* FeaturedStreamsFeed */ = {
+		204831CD24B8C9C500361B50 /* TwitchStreamsFeed */ = {
 			isa = PBXGroup;
 			children = (
-				2042D9BF24B37CB9007C8E5E /* Subviews */,
-				2042D9B724B378EA007C8E5E /* FeaturedStreamsViewController.swift */,
-				2042D9BB24B379A6007C8E5E /* FeaturedStreamsViewModel.swift */,
+				204831D924B8D16200361B50 /* Subviews */,
+				204831D024B8CA2300361B50 /* ModelConverter */,
+				204831CE24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift */,
+				204831D524B8CFD200361B50 /* TwitchStreamsFeedViewController.swift */,
 				20FDFFB324B39F2E00FA5133 /* WebKitViewController.swift */,
 			);
-			path = FeaturedStreamsFeed;
+			path = TwitchStreamsFeed;
 			sourceTree = "<group>";
 		};
-		2042D9BF24B37CB9007C8E5E /* Subviews */ = {
+		204831D024B8CA2300361B50 /* ModelConverter */ = {
 			isa = PBXGroup;
 			children = (
-				2037665024B6233400A7089F /* TwitchFeaturedStreamCell.swift */,
+				204831D124B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift */,
+			);
+			path = ModelConverter;
+			sourceTree = "<group>";
+		};
+		204831D924B8D16200361B50 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				204831DA24B8D18100361B50 /* TwitchStreamCell.swift */,
 				2037665224B6314800A7089F /* PosterImageViewBaseView.swift */,
 			);
 			path = Subviews;
@@ -155,6 +168,7 @@
 		20EF34D324B11AC30082FA67 /* TwitchGamesFeed */ = {
 			isa = PBXGroup;
 			children = (
+				204831CD24B8C9C500361B50 /* TwitchStreamsFeed */,
 				20EF34E224B11AC50082FA67 /* Info.plist */,
 				203644B824B1DF7400C31BC9 /* Protocols.swift */,
 				2042D9B524B378B6007C8E5E /* Recources */,
@@ -164,7 +178,6 @@
 				20EF350224B11C580082FA67 /* Model */,
 				20EF350424B11C580082FA67 /* Networking */,
 				20EF350724B11C580082FA67 /* TopGamesStreamsFeed */,
-				2042D9B624B378CA007C8E5E /* FeaturedStreamsFeed */,
 			);
 			path = TwitchGamesFeed;
 			sourceTree = "<group>";
@@ -173,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				20EF350324B11C580082FA67 /* TwitchGame.swift */,
+				204831CB24B8C93300361B50 /* TwitchStream.swift */,
 				2042D9BD24B37A11007C8E5E /* TwitchFeaturedStream.swift */,
 			);
 			path = Model;
@@ -212,7 +226,7 @@
 			children = (
 				20FD59A624B19FA4008DD901 /* AppCoordinator.swift */,
 				203644BC24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift */,
-				2042D9B324B3781F007C8E5E /* FeaturedStreamsCoordinator.swift */,
+				204831D724B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -348,30 +362,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2042D9BC24B379A6007C8E5E /* FeaturedStreamsViewModel.swift in Sources */,
+				204831D824B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift in Sources */,
 				2037665324B6314800A7089F /* PosterImageViewBaseView.swift in Sources */,
-				2042D9B824B378EA007C8E5E /* FeaturedStreamsViewController.swift in Sources */,
 				203644BD24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift in Sources */,
-				2042D9B424B37820007C8E5E /* FeaturedStreamsCoordinator.swift in Sources */,
 				20893A5A24B240E2006A8964 /* Rx + Extensions.swift in Sources */,
+				204831CC24B8C93300361B50 /* TwitchStream.swift in Sources */,
+				204831D624B8CFD200361B50 /* TwitchStreamsFeedViewController.swift in Sources */,
 				20EF351224B11C580082FA67 /* DotMenuButton.swift in Sources */,
 				2042D9BA24B3793D007C8E5E /* UIScrollView + Extensions.swift in Sources */,
+				204831CF24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift in Sources */,
 				20EF351124B11C580082FA67 /* TopGamesStreamsFeedViewModel.swift in Sources */,
 				20FD59A724B19FA4008DD901 /* AppCoordinator.swift in Sources */,
 				20EF350E24B11C580082FA67 /* TwitchGame.swift in Sources */,
 				20EF34D524B11AC30082FA67 /* AppDelegate.swift in Sources */,
+				204831DB24B8D18100361B50 /* TwitchStreamCell.swift in Sources */,
 				203644B724B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift in Sources */,
+				204831D224B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift in Sources */,
 				20EF351424B11C580082FA67 /* TwitchGameCell.swift in Sources */,
-				2042D9C324B37DFA007C8E5E /* FeaturedStreamsDIPart.swift in Sources */,
 				203644B124B1D32100C31BC9 /* AppFramework.swift in Sources */,
 				20FDFFB424B39F2E00FA5133 /* WebKitViewController.swift in Sources */,
 				2042D9BE24B37A11007C8E5E /* TwitchFeaturedStream.swift in Sources */,
 				20EF350F24B11C580082FA67 /* HTTPClient.swift in Sources */,
 				203644B924B1DF7400C31BC9 /* Protocols.swift in Sources */,
 				203644B524B1D37600C31BC9 /* CoordinatorDIPart.swift in Sources */,
-				2037665124B6233400A7089F /* TwitchFeaturedStreamCell.swift in Sources */,
 				20EF351024B11C580082FA67 /* TwitchAPI.swift in Sources */,
 				20EF351524B11C580082FA67 /* TopGamesStreamsFeedViewController.swift in Sources */,
+				204831D424B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift in Sources */,
 				20EF351324B11C580082FA67 /* SlideMenuItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

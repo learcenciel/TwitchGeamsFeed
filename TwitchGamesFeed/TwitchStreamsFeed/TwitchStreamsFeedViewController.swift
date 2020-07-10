@@ -1,17 +1,18 @@
 //
-//  FeaturedStreamsViewController.swift
+//  TwitchStreamsFeedViewController.swift
 //  TwitchGamesFeed
 //
-//  Created by Alexander on 06.07.2020.
+//  Created by Alexander on 10.07.2020.
 //  Copyright © 2020 Alexander Team. All rights reserved.
 //
 
+import NVActivityIndicatorView
 import RxCocoa
 import RxSwift
 import SnapKit
 import UIKit
 
-class FeaturedStreamsViewController: UIViewController {
+class TwitchStreamsFeedViewController: UIViewController {
     
     private lazy var featuredStreamsTableView: UITableView = {
         let featuredStreamsTableView = UITableView()
@@ -20,15 +21,21 @@ class FeaturedStreamsViewController: UIViewController {
         return featuredStreamsTableView
     }()
     
-    var featuredStreamsViewModel: FeaturedStreamsViewModel?
-    private let featuredStreams: BehaviorRelay<[FeaturedResponse]> = BehaviorRelay(value: [])
+    private let footerView =
+    NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40),
+                            type: .circleStrokeSpin,
+                            color: UIColor(red: 85/255, green: 26/255, blue: 173/255, alpha: 1.0),
+                            padding: .none)
+    
+    var featuredStreamsViewModel: TwitchStreamsFeedViewModel?
+    private let featuredStreams: BehaviorRelay<[TwitchStreamInfo]> = BehaviorRelay(value: [])
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureStreamsCollectionView()
+        configureStreamsTableView()
         configureBindings()
-        featuredStreamsViewModel?.fetchFeaturedStreamsList()
+        featuredStreamsViewModel?.fetchStreamList()
         view.backgroundColor = .white
     }
     
@@ -60,11 +67,11 @@ class FeaturedStreamsViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .bind(to: self.featuredStreams)
         
-        disposeBag += featuredStreams.bind(to: featuredStreamsTableView.rx.items(cellIdentifier: "cellId", cellType: TwitchFeaturedStreamCell.self)) { row, featuredStream, cell in
+        disposeBag += featuredStreams.bind(to: featuredStreamsTableView.rx.items(cellIdentifier: "cellId", cellType: TwitchStreamCell.self)) { row, featuredStream, cell in
             cell.featuredStream = featuredStream
         }
         
-        disposeBag += featuredStreamsTableView.rx.modelSelected(FeaturedResponse.self)
+        disposeBag += featuredStreamsTableView.rx.modelSelected(TwitchStreamInfo.self)
             .subscribe(onNext: { [unowned self] stream in
                 self.featuredStreamsViewModel?.featuredStreamTapped.onNext(stream)
             })
@@ -72,7 +79,19 @@ class FeaturedStreamsViewController: UIViewController {
         disposeBag += featuredStreamsViewModel?.error.subscribe(onNext: { error in
             print(error)
         })
-            
+        
+        disposeBag += featuredStreamsViewModel?.loading
+            .skip(1)
+            .subscribe(onNext: { isLoading in
+                if isLoading {
+                    self.footerView.isHidden = false
+                    self.footerView.startAnimating()
+                } else {
+                    self.footerView.isHidden = true
+                    self.footerView.stopAnimating()
+                }
+            })
+        
         disposeBag += featuredStreamsTableView.rx.contentOffset
             .skip(3)
             .subscribe(onNext: { [unowned self] offset in
@@ -83,8 +102,11 @@ class FeaturedStreamsViewController: UIViewController {
             })
     }
     
-    func configureStreamsCollectionView() {
+    func configureStreamsTableView() {
         self.view.addSubview(featuredStreamsTableView)
+        
+        featuredStreamsTableView.tableFooterView = footerView
+        footerView.isHidden = true
         
         featuredStreamsTableView.showsVerticalScrollIndicator = false
         featuredStreamsTableView.showsHorizontalScrollIndicator = false
@@ -96,7 +118,7 @@ class FeaturedStreamsViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
         
-        featuredStreamsTableView.register(TwitchFeaturedStreamCell.self, forCellReuseIdentifier: "cellId")
+        featuredStreamsTableView.register(TwitchStreamCell.self, forCellReuseIdentifier: "cellId")
         featuredStreamsTableView.rowHeight = UITableView.automaticDimension
     }
 }

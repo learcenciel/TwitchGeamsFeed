@@ -15,24 +15,20 @@ class TwitchAPI {
     init(httpClient: HTTPClient) {
         self.httpClient = httpClient
     }
-
-    func fetchTopGames(parameters: [String: Any]?,
-                             completionHandler: @escaping(Result<TwitchResponse, HTTPErrors>) -> Void) {
-        httpClient.get(url: "https://api.twitch.tv/helix/games/top",
-                       parameters: parameters,
-                       completionHandler: completionHandler)
-    }
     
-    func fetchNextTopGames(parameters: [String: Any]?,
-                             completionHandler: @escaping(Result<TwitchResponse, HTTPErrors>) -> Void) {
-        httpClient.get(url: "https://api.twitch.tv/helix/games/top",
-                       parameters: parameters,
+    func fetchTopGames(completionHandler: @escaping(Result<TwitchPopularGamesResponse, HTTPErrors>) -> Void) {
+        httpClient.get(url: "https://api.twitch.tv/kraken/games/top",
+                       headers: ["Client-ID": "m61dz6t4k3mkbn7tllby7j7hhob7uz",
+                                 "Accept": "application/vnd.twitchtv.v5+json"],
+                       parameters: nil,
                        completionHandler: completionHandler)
     }
     
     func fetchFeaturedStreams(parameters: [String: Any]?,
-                             completionHandler: @escaping(Result<TwitchFeaturedStream, HTTPErrors>) -> Void) {
+                              completionHandler: @escaping(Result<TwitchFeaturedStream, HTTPErrors>) -> Void) {
         httpClient.get(url: "https://api.twitch.tv/helix/streams",
+                       headers: ["Authorization": "Bearer l7sadz3bg5ir8lepdetca7h5tq7apv",
+                                 "Client-ID": "m61dz6t4k3mkbn7tllby7j7hhob7uz"],
                        parameters: parameters,
                        completionHandler: completionHandler)
     }

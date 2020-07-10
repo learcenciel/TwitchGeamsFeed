@@ -41,22 +41,13 @@ class TwitchGameCell: UICollectionViewCell {
         return viewersCountLabel
     }()
     
-    private let gameTagLabel: UILabel = {
-        let gameTagLabel = UILabel()
-        gameTagLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        gameTagLabel.numberOfLines = 1
-        gameTagLabel.textAlignment = .left
-        gameTagLabel.textColor = .white
-        gameTagLabel.text = "First person Shooter"
-        return gameTagLabel
-    }()
-    
-    var twitchGame: TwitchGame! {
+    var twitchGame: TwitchGameResponse! {
         didSet {
-            let prepString = twitchGame.posterPathUrl.replacingOccurrences(of: "{width}x{height}", with: "720x1136")
+            let prepString = twitchGame.game.imageBox.gameUrlPath.replacingOccurrences(of: "{width}x{height}", with: "720x1136")
             guard let url = URL(string: prepString) else { return }
             Nuke.loadImage(with: url, into: posterImageView)
-            titleLabel.text = twitchGame.name
+            titleLabel.text = twitchGame.game.name
+            viewersCountLabel.text = "\(twitchGame.viewersCount) viewers"
         }
     }
     
@@ -87,7 +78,6 @@ class TwitchGameCell: UICollectionViewCell {
         containerView.addSubview(posterImageView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(viewersCountLabel)
-        containerView.addSubview(gameTagLabel)
         containerView.layer.cornerRadius = 18
         containerView.clipsToBounds = true
         containerView.backgroundColor = UIColor(red: 85/255, green: 26/255, blue: 173/255, alpha: 1.0)
@@ -112,12 +102,6 @@ class TwitchGameCell: UICollectionViewCell {
         viewersCountLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(14)
             make.leading.equalTo(titleLabel.snp.leading)
-            make.trailing.lessThanOrEqualTo(containerView.snp.trailing).offset(-14)
-        }
-        
-        gameTagLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(containerView.snp.bottom).offset(-14)
-            make.leading.equalTo(viewersCountLabel.snp.leading)
             make.trailing.lessThanOrEqualTo(containerView.snp.trailing).offset(-14)
         }
     }

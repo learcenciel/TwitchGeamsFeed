@@ -50,7 +50,7 @@ class TopGamesStreamsFeedViewController: UIViewController {
     private var isMenuExpanded = false
     private var dragMenuWidth: CGFloat = 0
     
-    private var twitchGames: BehaviorRelay<[TwitchGame]> = BehaviorRelay(value: [])
+    private var twitchGames: BehaviorRelay<[TwitchGameResponse]> = BehaviorRelay(value: [])
     private let disposeBag = DisposeBag()
     var topGamesStreamsViewModel: TopGamesStreamsFeedViewModel?
 
@@ -97,15 +97,6 @@ class TopGamesStreamsFeedViewController: UIViewController {
         disposeBag += topGamesStreamsViewModel?.error.subscribe(onNext: { error in
             print(error)
         })
-        
-        disposeBag += streamsCollectionView.rx.contentOffset
-            .skip(1)
-            .subscribe(onNext: { offset in
-                if self.streamsCollectionView.isNearBottomEdge(edgeOffset: 20) && !self.topGamesStreamsViewModel!.isLoading {
-                    self.topGamesStreamsViewModel!.isLoading = true
-                    self.topGamesStreamsViewModel?.fetchNextGamesList()
-                }
-            })
     }
     
     private func configureScreenTypeTitleLabel() {

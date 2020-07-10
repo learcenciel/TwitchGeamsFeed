@@ -8,32 +8,40 @@
 
 import Foundation
 
-struct TwitchResponse: Decodable {
-    let data: [TwitchGame]
-    let pagination: Pagination
+struct TwitchPopularGamesResponse: Decodable {
+    let games: [TwitchGameResponse]
     
     private enum CodingKeys: String, CodingKey {
-        case data = "data"
-        case pagination = "pagination"
+        case games = "top"
+    }
+}
+
+struct TwitchGameResponse: Decodable {
+    let game: TwitchGame
+    let viewersCount: Int
+    let channelsCount: Int
+    
+    private enum CodingKeys: String, CodingKey {
+        case game = "game"
+        case viewersCount = "viewers"
+        case channelsCount = "channels"
     }
 }
 
 struct TwitchGame: Decodable {
-    let id: String
     let name: String
-    let posterPathUrl: String
+    let imageBox: ImageBox
     
     private enum CodingKeys: String, CodingKey {
-        case id = "id"
         case name = "name"
-        case posterPathUrl = "box_art_url"
+        case imageBox = "box"
     }
 }
 
-struct Pagination: Decodable {
-    let cursor: String
+struct ImageBox: Decodable {
+    let gameUrlPath: String
     
     private enum CodingKeys: String, CodingKey {
-        case cursor = "cursor"
+        case gameUrlPath = "template"
     }
 }
