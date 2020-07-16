@@ -12,30 +12,26 @@ import RxSwift
 
 class TopGamesStreamsFeedViewModel {
     
+    enum TopGamesStreamsFeedError {
+        case parseError(String)
+    }
+    
     private let apiManager: TwitchAPI
+    private let disposable = DisposeBag()
     
     init(apiManager: TwitchAPI) {
         self.apiManager = apiManager
     }
     
-    enum TopGamesStreamsFeedError {
-        case parseError(String)
-    }
-    
     let slideMenuItems: BehaviorRelay<[SlideMenuItemType]> = BehaviorRelay(value: [])
-    let topGames: BehaviorRelay<[TwitchGameResponse]> = BehaviorRelay(value: [])
-    let loading: PublishSubject<Bool> = PublishSubject()
+    let slideMenuItemTapped: PublishSubject<SlideMenuItemType> = PublishSubject()
+    let topGames: BehaviorRelay<[GameResponse]> = BehaviorRelay(value: [])
+    let gameTapped: PublishSubject<GameResponse> = PublishSubject()
     let error: PublishSubject<TopGamesStreamsFeedError> = PublishSubject()
-    let gameTapped: PublishSubject<TwitchGame> = PublishSubject()
-    let featuredStreamsItemMenuTapped: PublishSubject<SlideMenuItemType> = PublishSubject()
     var isLoading: Bool = false
     
-    private let disposable = DisposeBag()
-    
     func fetchGamesList() {
-        self.loading.onNext(true)
         apiManager.fetchTopGames { result in
-            self.loading.onNext(false)
             switch result {
             case .success(let twitchGames):
                 self.topGames.accept(twitchGames.games)

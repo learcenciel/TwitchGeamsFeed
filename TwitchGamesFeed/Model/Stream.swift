@@ -8,12 +8,7 @@
 
 import Foundation
 
-struct TwitchStream: Decodable {
-    var twitchStreamInfo: [TwitchStreamInfo]
-    let nextUrl: String
-}
-
-struct TwitchStreamInfo: Decodable {
+struct Stream: Decodable {
     let title: String
     let userName: String
     let viewerCount: Int

@@ -50,20 +50,22 @@ class TopGamesStreamsFeedViewController: UIViewController {
     private var isMenuExpanded = false
     private var dragMenuWidth: CGFloat = 0
     
-    private var twitchGames: BehaviorRelay<[TwitchGameResponse]> = BehaviorRelay(value: [])
+    private var twitchGames: BehaviorRelay<[GameResponse]> = BehaviorRelay(value: [])
     private let disposeBag = DisposeBag()
     var topGamesStreamsViewModel: TopGamesStreamsFeedViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(red: 85/255, green: 26/255, blue: 173/255, alpha: 1.0)
+
+        configureBindings()
         configureSlideMenuTableView()
         configureStreamsCollectionViewContainerView()
         configureDotViewButton()
         configureScreenTypeTitleLabel()
         configureStreamsCollectionView()
-        configureBindings()
+        
         topGamesStreamsViewModel?.fetchGamesList()
-        view.backgroundColor = UIColor(red: 85/255, green: 26/255, blue: 173/255, alpha: 1.0)
     }
     
     // MARK: Views configure methods
@@ -75,18 +77,18 @@ class TopGamesStreamsFeedViewController: UIViewController {
             .bind(to: self.twitchGames)
         
         disposeBag += topGamesStreamsViewModel?.slideMenuItems.bind(to: slideMenuTableView.rx.items(cellIdentifier: "cellId", cellType: SlideMenuItemCell.self)) { row, slideMenuItem, cell in
-            cell.menuItemLabel.text = slideMenuItem.rawValue
+            cell.setup(slideMenuItem.rawValue)
         }
             
-        disposeBag += twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: TwitchGameCell.self)) {row, game, cell in
+        disposeBag += twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: GameCell.self)) {row, game, cell in
             cell.twitchGame = game
         }
         
         disposeBag += slideMenuTableView.rx.itemSelected.subscribe(onNext: { indexPath in
-            self.topGamesStreamsViewModel?.featuredStreamsItemMenuTapped.onNext(SlideMenuItemType.allCases[indexPath.row])
+            self.topGamesStreamsViewModel?.slideMenuItemTapped.onNext(SlideMenuItemType.allCases[indexPath.row])
         })
         
-        disposeBag += streamsCollectionView.rx.modelSelected(TwitchGame.self).subscribe(onNext: { [unowned self] game in
+        disposeBag += streamsCollectionView.rx.modelSelected(GameResponse.self).subscribe(onNext: { [unowned self] game in
             self.topGamesStreamsViewModel?.gameTapped.onNext(game)
         })
         
@@ -97,16 +99,6 @@ class TopGamesStreamsFeedViewController: UIViewController {
         disposeBag += topGamesStreamsViewModel?.error.subscribe(onNext: { error in
             print(error)
         })
-    }
-    
-    private func configureScreenTypeTitleLabel() {
-        self.screenTypeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.streamsCollectionViewContainerView.addSubview(screenTypeTitleLabel)
-        self.screenTypeTitleLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(dotButtonView)
-            make.leading.equalTo(dotButtonView.snp.trailing).offset(14)
-            make.trailing.equalToSuperview().offset(-24)
-        }
     }
     
     private func configureSlideMenuTableView() {
@@ -131,6 +123,29 @@ class TopGamesStreamsFeedViewController: UIViewController {
         streamsCollectionViewContainerView.addGestureRecognizer(panGesture)
     }
     
+    private func configureDotViewButton() {
+        dotButtonView.onTap = { [weak self] in
+            self?.toggleMenu()
+        }
+        
+        streamsCollectionViewContainerView.addSubview(dotButtonView)
+        dotButtonView.snp.makeConstraints { make in
+            make.leading.equalTo(streamsCollectionViewContainerView.snp.leading).offset(24)
+            make.top.equalTo(streamsCollectionViewContainerView.snp.topMargin).offset(14)
+            make.size.equalTo(18)
+        }
+    }
+    
+    private func configureScreenTypeTitleLabel() {
+        self.screenTypeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.streamsCollectionViewContainerView.addSubview(screenTypeTitleLabel)
+        self.screenTypeTitleLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(dotButtonView)
+            make.leading.equalTo(dotButtonView.snp.trailing).offset(14)
+            make.trailing.equalToSuperview().offset(-24)
+        }
+    }
+    
     private func configureStreamsCollectionView() {
         streamsCollectionViewContainerView.addSubview(streamsCollectionView)
         
@@ -144,26 +159,13 @@ class TopGamesStreamsFeedViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
         
-        streamsCollectionView.register(TwitchGameCell.self, forCellWithReuseIdentifier: "cellId")
+        streamsCollectionView.register(GameCell.self, forCellWithReuseIdentifier: "cellId")
         
         let layout = streamsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: view.frame.width - 48, height: 180)
         layout.minimumLineSpacing = 24
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
         layout.scrollDirection = .vertical
-    }
-    
-    private func configureDotViewButton() {
-        dotButtonView.onTap = { [weak self] in
-            self?.toggleMenu()
-        }
-        
-        streamsCollectionViewContainerView.addSubview(dotButtonView)
-        dotButtonView.snp.makeConstraints { make in
-            make.leading.equalTo(streamsCollectionViewContainerView.snp.leading).offset(24)
-            make.top.equalTo(streamsCollectionViewContainerView.snp.topMargin).offset(14)
-            make.size.equalTo(18)
-        }
     }
     
     // MARK: Slide Menu methods

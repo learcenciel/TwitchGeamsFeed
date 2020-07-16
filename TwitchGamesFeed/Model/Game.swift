@@ -8,32 +8,32 @@
 
 import Foundation
 
-struct TwitchPopularGamesResponse: Decodable {
-    let games: [TwitchGameResponse]
+struct PopularGamesResponse: Decodable {
+    var games: [GameResponse]
     
     private enum CodingKeys: String, CodingKey {
         case games = "top"
     }
 }
 
-struct TwitchGameResponse: Decodable {
-    let game: TwitchGame
+struct GameResponse: Decodable {
+    let game: Game
     let viewersCount: Int
-    let channelsCount: Int
     
     private enum CodingKeys: String, CodingKey {
         case game = "game"
         case viewersCount = "viewers"
-        case channelsCount = "channels"
     }
 }
 
-struct TwitchGame: Decodable {
+struct Game: Decodable {
     let name: String
+    let id: Int
     let imageBox: ImageBox
     
     private enum CodingKeys: String, CodingKey {
         case name = "name"
+        case id = "_id"
         case imageBox = "box"
     }
 }

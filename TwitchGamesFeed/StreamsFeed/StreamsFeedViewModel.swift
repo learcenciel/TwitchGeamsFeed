@@ -10,12 +10,16 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class TwitchStreamsFeedViewModel {
-    
-    enum StreamType {
-        case featured
-        case gameCategory
-    }
+enum StreamType {
+    case featured
+    case gameCategory(String)
+}
+
+enum FeaturedStreamsFeedError {
+    case parseError(String)
+}
+
+class StreamsFeedViewModel {
     
     var streamType: StreamType = .featured
     private let apiManager: TwitchAPI
@@ -27,17 +31,13 @@ class TwitchStreamsFeedViewModel {
         self.twitchStreamsFeedModelConverter = twitchStreamsFeedModelConverter
     }
     
-    enum FeaturedStreamsFeedError {
-        case parseError(String)
-    }
-    
-    let featuredStreams: BehaviorRelay<[TwitchStreamInfo]> = BehaviorRelay(value: [])
+    let featuredStreams: BehaviorRelay<[Stream]> = BehaviorRelay(value: [])
     let loading: PublishSubject<Bool> = PublishSubject()
     let error: PublishSubject<FeaturedStreamsFeedError> = PublishSubject()
-    let featuredStreamTapped: PublishSubject<TwitchStreamInfo> = PublishSubject()
+    let featuredStreamTapped: PublishSubject<Stream> = PublishSubject()
     var isLoading: Bool = false
-    var nextUrl: String = ""
     let didFinish: PublishSubject<Void> = PublishSubject()
+    var selectedGame: String = ""
     
     private let disposable = DisposeBag()
     
@@ -52,23 +52,35 @@ class TwitchStreamsFeedViewModel {
                     guard let convertedModel =
                         self?.twitchStreamsFeedModelConverter.convertTwitchFeaturedStreamResponse(twitchFeaturedStreamResponse)
                     else { return }
-                    self?.featuredStreams.accept(convertedModel.twitchStreamInfo)
-                    self?.nextUrl = convertedModel.nextUrl
+                    self?.featuredStreams.accept(convertedModel)
                     self?.isLoading = false
                 case .failure(let httpError):
                     self?.error.onNext(.parseError(httpError.localizedDescription))
                 }
             }
-        case .gameCategory:
-            break
+        case .gameCategory(let game):
+            self.selectedGame = game
+            apiManager.fetchStreams(parameters: ["query": self.selectedGame]) { [weak self] result in
+                self?.loading.onNext(false)
+                switch result {
+                case .success(let twitchSearchGameStreamsResponse):
+                    guard let convertedModel =
+                        self?.twitchStreamsFeedModelConverter.convertTwitchSearchGameStreamResponse(twitchSearchGameStreamsResponse)
+                    else { return }
+                    self?.featuredStreams.accept(convertedModel)
+                    self?.isLoading = false
+                case .failure(let httpError):
+                    self?.error.onNext(.parseError(httpError.localizedDescription))
+                }
+            }
         }
     }
     
-    func fetchNextGamesList() {
+    func fetchNextStreamsList(with offset: Int) {
         self.loading.onNext(true)
         switch streamType {
         case .featured:
-            apiManager.fetchFeaturedStreams(parameters: ["after": self.nextUrl]) { [weak self] result in
+            apiManager.fetchFeaturedStreams(parameters: ["offset": offset]) { [weak self] result in
                 self?.loading.onNext(false)
                 switch result {
                 case .success(let twitchFeaturedStreamResponse):
@@ -77,14 +89,28 @@ class TwitchStreamsFeedViewModel {
                         self?.twitchStreamsFeedModelConverter.convertTwitchFeaturedStreamResponse(twitchFeaturedStreamResponse),
                         let previousValue = self?.featuredStreams.value
                     else { return }
-                    self?.featuredStreams.accept(previousValue + convertedModel.twitchStreamInfo)
+                    self?.featuredStreams.accept(previousValue + convertedModel)
                     self?.isLoading = false
                 case .failure(let httpError):
                     self?.error.onNext(.parseError(httpError.localizedDescription))
                 }
             }
         case .gameCategory:
-            break
+            apiManager.fetchStreams(parameters: ["query": self.selectedGame,
+                                                 "offset": offset]) { [weak self] result in
+                self?.loading.onNext(false)
+                switch result {
+                case .success(let twitchSearchGameStreamsResponse):
+                    guard let convertedModel =
+                        self?.twitchStreamsFeedModelConverter.convertTwitchSearchGameStreamResponse(twitchSearchGameStreamsResponse),
+                    let previousValue = self?.featuredStreams.value
+                    else { return }
+                    self?.featuredStreams.accept(previousValue + convertedModel)
+                    self?.isLoading = false
+                case .failure(let httpError):
+                    self?.error.onNext(.parseError(httpError.localizedDescription))
+                }
+            }
         }
     }
 }

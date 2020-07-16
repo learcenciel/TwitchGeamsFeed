@@ -17,7 +17,6 @@ class HTTPClient {
     func get<T: Decodable>(url: String,
                            headers: HTTPHeaders?,
                            parameters: [String: Any]?, completionHandler: @escaping(Result<T, HTTPErrors>) -> Void) {
-        
         AF.request(url, method: .get, parameters: parameters, headers: headers)
             .responseData { data in
                 switch data.result {

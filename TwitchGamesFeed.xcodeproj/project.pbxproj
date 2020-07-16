@@ -12,27 +12,48 @@
 		203644B724B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203644B624B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift */; };
 		203644B924B1DF7400C31BC9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203644B824B1DF7400C31BC9 /* Protocols.swift */; };
 		203644BD24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203644BC24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift */; };
-		2037665324B6314800A7089F /* PosterImageViewBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037665224B6314800A7089F /* PosterImageViewBaseView.swift */; };
+		2037665324B6314800A7089F /* PosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037665224B6314800A7089F /* PosterImageView.swift */; };
+		2039D13C24BF4EE0000BF6F9 /* ChannelSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039D13B24BF4EE0000BF6F9 /* ChannelSearchController.swift */; };
+		2039D13E24BF4F9E000BF6F9 /* ChannelSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039D13D24BF4F9E000BF6F9 /* ChannelSearchResponse.swift */; };
+		2039D14424BF52FE000BF6F9 /* SearchChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039D14324BF52FE000BF6F9 /* SearchChannelCell.swift */; };
+		2039D14624BF595F000BF6F9 /* CheckMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039D14524BF595F000BF6F9 /* CheckMarkView.swift */; };
 		2042D9BA24B3793D007C8E5E /* UIScrollView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042D9B924B3793D007C8E5E /* UIScrollView + Extensions.swift */; };
-		2042D9BE24B37A11007C8E5E /* TwitchFeaturedStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042D9BD24B37A11007C8E5E /* TwitchFeaturedStream.swift */; };
-		204831CC24B8C93300361B50 /* TwitchStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831CB24B8C93300361B50 /* TwitchStream.swift */; };
-		204831CF24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831CE24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift */; };
+		2042D9BE24B37A11007C8E5E /* FeaturedStreamsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042D9BD24B37A11007C8E5E /* FeaturedStreamsResponse.swift */; };
+		204831CC24B8C93300361B50 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831CB24B8C93300361B50 /* Stream.swift */; };
+		204831CF24B8C9D900361B50 /* StreamsFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831CE24B8C9D900361B50 /* StreamsFeedViewModel.swift */; };
 		204831D224B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D124B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift */; };
 		204831D424B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D324B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift */; };
-		204831D624B8CFD200361B50 /* TwitchStreamsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D524B8CFD200361B50 /* TwitchStreamsFeedViewController.swift */; };
-		204831D824B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D724B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift */; };
-		204831DB24B8D18100361B50 /* TwitchStreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831DA24B8D18100361B50 /* TwitchStreamCell.swift */; };
+		204831D624B8CFD200361B50 /* StreamsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D524B8CFD200361B50 /* StreamsFeedViewController.swift */; };
+		204831D824B8D04800361B50 /* StreamsFeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831D724B8D04800361B50 /* StreamsFeedCoordinator.swift */; };
+		204831DB24B8D18100361B50 /* StreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204831DA24B8D18100361B50 /* StreamCell.swift */; };
+		204D20B924BB2D17001BDDFC /* SearchGameStreams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D20B824BB2D17001BDDFC /* SearchGameStreams.swift */; };
+		204D20BC24BB37EF001BDDFC /* SearchFeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D20BB24BB37EF001BDDFC /* SearchFeedCoordinator.swift */; };
+		204D20BE24BB38DE001BDDFC /* SearchFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D20BD24BB38DE001BDDFC /* SearchFeedViewController.swift */; };
+		204D20C024BB38F7001BDDFC /* SearchFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D20BF24BB38F7001BDDFC /* SearchFeedViewModel.swift */; };
+		204D20C224BB3A3F001BDDFC /* SearchFeedDIPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D20C124BB3A3F001BDDFC /* SearchFeedDIPart.swift */; };
+		204D20C524BB4253001BDDFC /* SearchTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204D20C424BB4253001BDDFC /* SearchTextFieldView.swift */; };
+		2055C5CD24C0B56C0067D5FF /* UIVIewController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2055C5CC24C0B56C0067D5FF /* UIVIewController + Extensions.swift */; };
+		20604DA824C0387D0089CD77 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20604DA724C0387D0089CD77 /* DatabaseManager.swift */; };
+		20604DAA24C0389F0089CD77 /* RealmGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20604DA924C0389F0089CD77 /* RealmGame.swift */; };
+		20604DAC24C03CFF0089CD77 /* NotificationCenter + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20604DAB24C03CFF0089CD77 /* NotificationCenter + Extensions.swift */; };
+		20604DAE24C03D9B0089CD77 /* PersistanceDIPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20604DAD24C03D9B0089CD77 /* PersistanceDIPart.swift */; };
+		20604DB124C0686C0089CD77 /* FavoriteGamesFeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20604DB024C0686C0089CD77 /* FavoriteGamesFeedCoordinator.swift */; };
+		20604DB324C0688F0089CD77 /* FavoriteGamesFeedDIPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20604DB224C0688F0089CD77 /* FavoriteGamesFeedDIPart.swift */; };
+		20604DB624C068A70089CD77 /* FavoriteGamesFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20604DB524C068A70089CD77 /* FavoriteGamesFeedViewController.swift */; };
+		20604DB824C068B10089CD77 /* FavoriteGamesFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20604DB724C068B10089CD77 /* FavoriteGamesFeedViewModel.swift */; };
+		2077AE7424BD650D006C2BE4 /* SearchTypeSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077AE7324BD650D006C2BE4 /* SearchTypeSegmentedControl.swift */; };
+		2077AE7624BD6BAC006C2BE4 /* StreamSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2077AE7524BD6BAC006C2BE4 /* StreamSearchController.swift */; };
 		20893A5A24B240E2006A8964 /* Rx + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20893A5924B240E2006A8964 /* Rx + Extensions.swift */; };
 		20EF34D524B11AC30082FA67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF34D424B11AC30082FA67 /* AppDelegate.swift */; };
 		20EF34DE24B11AC50082FA67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20EF34DD24B11AC50082FA67 /* Assets.xcassets */; };
 		20EF34E124B11AC50082FA67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20EF34DF24B11AC50082FA67 /* LaunchScreen.storyboard */; };
-		20EF350E24B11C580082FA67 /* TwitchGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350324B11C580082FA67 /* TwitchGame.swift */; };
+		20EF350E24B11C580082FA67 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350324B11C580082FA67 /* Game.swift */; };
 		20EF350F24B11C580082FA67 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350524B11C580082FA67 /* HTTPClient.swift */; };
 		20EF351024B11C580082FA67 /* TwitchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350624B11C580082FA67 /* TwitchAPI.swift */; };
 		20EF351124B11C580082FA67 /* TopGamesStreamsFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350824B11C580082FA67 /* TopGamesStreamsFeedViewModel.swift */; };
 		20EF351224B11C580082FA67 /* DotMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350A24B11C580082FA67 /* DotMenuButton.swift */; };
 		20EF351324B11C580082FA67 /* SlideMenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350B24B11C580082FA67 /* SlideMenuItemCell.swift */; };
-		20EF351424B11C580082FA67 /* TwitchGameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350C24B11C580082FA67 /* TwitchGameCell.swift */; };
+		20EF351424B11C580082FA67 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350C24B11C580082FA67 /* GameCell.swift */; };
 		20EF351524B11C580082FA67 /* TopGamesStreamsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF350D24B11C580082FA67 /* TopGamesStreamsFeedViewController.swift */; };
 		20FD59A724B19FA4008DD901 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FD59A624B19FA4008DD901 /* AppCoordinator.swift */; };
 		20FDFFB424B39F2E00FA5133 /* WebKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDFFB324B39F2E00FA5133 /* WebKitViewController.swift */; };
@@ -45,29 +66,50 @@
 		203644B624B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesStreamsFeedDIPart.swift; sourceTree = "<group>"; };
 		203644B824B1DF7400C31BC9 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		203644BC24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesFeedCoordinator.swift; sourceTree = "<group>"; };
-		2037665224B6314800A7089F /* PosterImageViewBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageViewBaseView.swift; sourceTree = "<group>"; };
+		2037665224B6314800A7089F /* PosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageView.swift; sourceTree = "<group>"; };
+		2039D13B24BF4EE0000BF6F9 /* ChannelSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSearchController.swift; sourceTree = "<group>"; };
+		2039D13D24BF4F9E000BF6F9 /* ChannelSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSearchResponse.swift; sourceTree = "<group>"; };
+		2039D14324BF52FE000BF6F9 /* SearchChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchChannelCell.swift; sourceTree = "<group>"; };
+		2039D14524BF595F000BF6F9 /* CheckMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMarkView.swift; sourceTree = "<group>"; };
 		2042D9B924B3793D007C8E5E /* UIScrollView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView + Extensions.swift"; sourceTree = "<group>"; };
-		2042D9BD24B37A11007C8E5E /* TwitchFeaturedStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchFeaturedStream.swift; sourceTree = "<group>"; };
-		204831CB24B8C93300361B50 /* TwitchStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStream.swift; sourceTree = "<group>"; };
-		204831CE24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedViewModel.swift; sourceTree = "<group>"; };
+		2042D9BD24B37A11007C8E5E /* FeaturedStreamsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedStreamsResponse.swift; sourceTree = "<group>"; };
+		204831CB24B8C93300361B50 /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		204831CE24B8C9D900361B50 /* StreamsFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamsFeedViewModel.swift; sourceTree = "<group>"; };
 		204831D124B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedModelConverter.swift; sourceTree = "<group>"; };
 		204831D324B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedDIPart.swift; sourceTree = "<group>"; };
-		204831D524B8CFD200361B50 /* TwitchStreamsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedViewController.swift; sourceTree = "<group>"; };
-		204831D724B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamsFeedCoordinator.swift; sourceTree = "<group>"; };
-		204831DA24B8D18100361B50 /* TwitchStreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchStreamCell.swift; sourceTree = "<group>"; };
+		204831D524B8CFD200361B50 /* StreamsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamsFeedViewController.swift; sourceTree = "<group>"; };
+		204831D724B8D04800361B50 /* StreamsFeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamsFeedCoordinator.swift; sourceTree = "<group>"; };
+		204831DA24B8D18100361B50 /* StreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamCell.swift; sourceTree = "<group>"; };
+		204D20B824BB2D17001BDDFC /* SearchGameStreams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGameStreams.swift; sourceTree = "<group>"; };
+		204D20BB24BB37EF001BDDFC /* SearchFeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFeedCoordinator.swift; sourceTree = "<group>"; };
+		204D20BD24BB38DE001BDDFC /* SearchFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFeedViewController.swift; sourceTree = "<group>"; };
+		204D20BF24BB38F7001BDDFC /* SearchFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFeedViewModel.swift; sourceTree = "<group>"; };
+		204D20C124BB3A3F001BDDFC /* SearchFeedDIPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFeedDIPart.swift; sourceTree = "<group>"; };
+		204D20C424BB4253001BDDFC /* SearchTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldView.swift; sourceTree = "<group>"; };
+		2055C5CC24C0B56C0067D5FF /* UIVIewController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController + Extensions.swift"; sourceTree = "<group>"; };
+		20604DA724C0387D0089CD77 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		20604DA924C0389F0089CD77 /* RealmGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmGame.swift; sourceTree = "<group>"; };
+		20604DAB24C03CFF0089CD77 /* NotificationCenter + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter + Extensions.swift"; sourceTree = "<group>"; };
+		20604DAD24C03D9B0089CD77 /* PersistanceDIPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceDIPart.swift; sourceTree = "<group>"; };
+		20604DB024C0686C0089CD77 /* FavoriteGamesFeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGamesFeedCoordinator.swift; sourceTree = "<group>"; };
+		20604DB224C0688F0089CD77 /* FavoriteGamesFeedDIPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGamesFeedDIPart.swift; sourceTree = "<group>"; };
+		20604DB524C068A70089CD77 /* FavoriteGamesFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGamesFeedViewController.swift; sourceTree = "<group>"; };
+		20604DB724C068B10089CD77 /* FavoriteGamesFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGamesFeedViewModel.swift; sourceTree = "<group>"; };
+		2077AE7324BD650D006C2BE4 /* SearchTypeSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTypeSegmentedControl.swift; sourceTree = "<group>"; };
+		2077AE7524BD6BAC006C2BE4 /* StreamSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamSearchController.swift; sourceTree = "<group>"; };
 		20893A5924B240E2006A8964 /* Rx + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx + Extensions.swift"; sourceTree = "<group>"; };
 		20EF34D124B11AC30082FA67 /* TwitchGamesFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitchGamesFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20EF34D424B11AC30082FA67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20EF34DD24B11AC50082FA67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20EF34E024B11AC50082FA67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20EF34E224B11AC50082FA67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20EF350324B11C580082FA67 /* TwitchGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitchGame.swift; sourceTree = "<group>"; };
+		20EF350324B11C580082FA67 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		20EF350524B11C580082FA67 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		20EF350624B11C580082FA67 /* TwitchAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitchAPI.swift; sourceTree = "<group>"; };
 		20EF350824B11C580082FA67 /* TopGamesStreamsFeedViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopGamesStreamsFeedViewModel.swift; sourceTree = "<group>"; };
 		20EF350A24B11C580082FA67 /* DotMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotMenuButton.swift; sourceTree = "<group>"; };
 		20EF350B24B11C580082FA67 /* SlideMenuItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuItemCell.swift; sourceTree = "<group>"; };
-		20EF350C24B11C580082FA67 /* TwitchGameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitchGameCell.swift; sourceTree = "<group>"; };
+		20EF350C24B11C580082FA67 /* GameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		20EF350D24B11C580082FA67 /* TopGamesStreamsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopGamesStreamsFeedViewController.swift; sourceTree = "<group>"; };
 		20FD59A624B19FA4008DD901 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		20FDFFB324B39F2E00FA5133 /* WebKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitViewController.swift; sourceTree = "<group>"; };
@@ -93,8 +135,7 @@
 			children = (
 				203644B024B1D32100C31BC9 /* AppFramework.swift */,
 				203644B424B1D37600C31BC9 /* CoordinatorDIPart.swift */,
-				203644B624B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift */,
-				204831D324B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift */,
+				20604DAD24C03D9B0089CD77 /* PersistanceDIPart.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -109,33 +150,78 @@
 			path = Recources;
 			sourceTree = "<group>";
 		};
-		204831CD24B8C9C500361B50 /* TwitchStreamsFeed */ = {
+		204831CD24B8C9C500361B50 /* StreamsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				204831D724B8D04800361B50 /* StreamsFeedCoordinator.swift */,
+				204831D324B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift */,
 				204831D924B8D16200361B50 /* Subviews */,
-				204831D024B8CA2300361B50 /* ModelConverter */,
-				204831CE24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift */,
-				204831D524B8CFD200361B50 /* TwitchStreamsFeedViewController.swift */,
+				204831D524B8CFD200361B50 /* StreamsFeedViewController.swift */,
+				204831CE24B8C9D900361B50 /* StreamsFeedViewModel.swift */,
 				20FDFFB324B39F2E00FA5133 /* WebKitViewController.swift */,
 			);
-			path = TwitchStreamsFeed;
+			path = StreamsFeed;
 			sourceTree = "<group>";
 		};
-		204831D024B8CA2300361B50 /* ModelConverter */ = {
+		204831D024B8CA2300361B50 /* Converters */ = {
 			isa = PBXGroup;
 			children = (
 				204831D124B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift */,
 			);
-			path = ModelConverter;
+			path = Converters;
 			sourceTree = "<group>";
 		};
 		204831D924B8D16200361B50 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				204831DA24B8D18100361B50 /* TwitchStreamCell.swift */,
-				2037665224B6314800A7089F /* PosterImageViewBaseView.swift */,
+				204831DA24B8D18100361B50 /* StreamCell.swift */,
+				2037665224B6314800A7089F /* PosterImageView.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		204D20BA24BB37C1001BDDFC /* SearchFeed */ = {
+			isa = PBXGroup;
+			children = (
+				204D20BB24BB37EF001BDDFC /* SearchFeedCoordinator.swift */,
+				204D20C124BB3A3F001BDDFC /* SearchFeedDIPart.swift */,
+				204D20C324BB4247001BDDFC /* Subviews */,
+				204D20BD24BB38DE001BDDFC /* SearchFeedViewController.swift */,
+				204D20BF24BB38F7001BDDFC /* SearchFeedViewModel.swift */,
+				2077AE7524BD6BAC006C2BE4 /* StreamSearchController.swift */,
+				2039D13B24BF4EE0000BF6F9 /* ChannelSearchController.swift */,
+			);
+			path = SearchFeed;
+			sourceTree = "<group>";
+		};
+		204D20C324BB4247001BDDFC /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				204D20C424BB4253001BDDFC /* SearchTextFieldView.swift */,
+				2077AE7324BD650D006C2BE4 /* SearchTypeSegmentedControl.swift */,
+				2039D14324BF52FE000BF6F9 /* SearchChannelCell.swift */,
+				2039D14524BF595F000BF6F9 /* CheckMarkView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		20604DA624C037B50089CD77 /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				20604DA724C0387D0089CD77 /* DatabaseManager.swift */,
+			);
+			path = Persistance;
+			sourceTree = "<group>";
+		};
+		20604DAF24C068470089CD77 /* FavoriteGamesFeed */ = {
+			isa = PBXGroup;
+			children = (
+				20604DB024C0686C0089CD77 /* FavoriteGamesFeedCoordinator.swift */,
+				20604DB224C0688F0089CD77 /* FavoriteGamesFeedDIPart.swift */,
+				20604DB524C068A70089CD77 /* FavoriteGamesFeedViewController.swift */,
+				20604DB724C068B10089CD77 /* FavoriteGamesFeedViewModel.swift */,
+			);
+			path = FavoriteGamesFeed;
 			sourceTree = "<group>";
 		};
 		20893A5824B240D8006A8964 /* Extensions */ = {
@@ -143,6 +229,8 @@
 			children = (
 				20893A5924B240E2006A8964 /* Rx + Extensions.swift */,
 				2042D9B924B3793D007C8E5E /* UIScrollView + Extensions.swift */,
+				20604DAB24C03CFF0089CD77 /* NotificationCenter + Extensions.swift */,
+				2055C5CC24C0B56C0067D5FF /* UIVIewController + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -168,16 +256,19 @@
 		20EF34D324B11AC30082FA67 /* TwitchGamesFeed */ = {
 			isa = PBXGroup;
 			children = (
-				204831CD24B8C9C500361B50 /* TwitchStreamsFeed */,
 				20EF34E224B11AC50082FA67 /* Info.plist */,
 				203644B824B1DF7400C31BC9 /* Protocols.swift */,
 				2042D9B524B378B6007C8E5E /* Recources */,
 				20893A5824B240D8006A8964 /* Extensions */,
 				203644AF24B1D2BD00C31BC9 /* DI */,
+				20604DA624C037B50089CD77 /* Persistance */,
 				20FD59A524B19F90008DD901 /* Coordinators */,
 				20EF350224B11C580082FA67 /* Model */,
 				20EF350424B11C580082FA67 /* Networking */,
 				20EF350724B11C580082FA67 /* TopGamesStreamsFeed */,
+				204831CD24B8C9C500361B50 /* StreamsFeed */,
+				20604DAF24C068470089CD77 /* FavoriteGamesFeed */,
+				204D20BA24BB37C1001BDDFC /* SearchFeed */,
 			);
 			path = TwitchGamesFeed;
 			sourceTree = "<group>";
@@ -185,9 +276,13 @@
 		20EF350224B11C580082FA67 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				20EF350324B11C580082FA67 /* TwitchGame.swift */,
-				204831CB24B8C93300361B50 /* TwitchStream.swift */,
-				2042D9BD24B37A11007C8E5E /* TwitchFeaturedStream.swift */,
+				204831D024B8CA2300361B50 /* Converters */,
+				20EF350324B11C580082FA67 /* Game.swift */,
+				20604DA924C0389F0089CD77 /* RealmGame.swift */,
+				204831CB24B8C93300361B50 /* Stream.swift */,
+				2042D9BD24B37A11007C8E5E /* FeaturedStreamsResponse.swift */,
+				204D20B824BB2D17001BDDFC /* SearchGameStreams.swift */,
+				2039D13D24BF4F9E000BF6F9 /* ChannelSearchResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,6 +299,8 @@
 		20EF350724B11C580082FA67 /* TopGamesStreamsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				203644BC24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift */,
+				203644B624B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift */,
 				20EF350924B11C580082FA67 /* Subviews */,
 				20EF350D24B11C580082FA67 /* TopGamesStreamsFeedViewController.swift */,
 				20EF350824B11C580082FA67 /* TopGamesStreamsFeedViewModel.swift */,
@@ -216,7 +313,7 @@
 			children = (
 				20EF350A24B11C580082FA67 /* DotMenuButton.swift */,
 				20EF350B24B11C580082FA67 /* SlideMenuItemCell.swift */,
-				20EF350C24B11C580082FA67 /* TwitchGameCell.swift */,
+				20EF350C24B11C580082FA67 /* GameCell.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -225,8 +322,6 @@
 			isa = PBXGroup;
 			children = (
 				20FD59A624B19FA4008DD901 /* AppCoordinator.swift */,
-				203644BC24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift */,
-				204831D724B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -362,33 +457,54 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				204831D824B8D04800361B50 /* TwitchStreamsFeedCoordinator.swift in Sources */,
-				2037665324B6314800A7089F /* PosterImageViewBaseView.swift in Sources */,
+				20604DB824C068B10089CD77 /* FavoriteGamesFeedViewModel.swift in Sources */,
+				20604DB624C068A70089CD77 /* FavoriteGamesFeedViewController.swift in Sources */,
+				204831D824B8D04800361B50 /* StreamsFeedCoordinator.swift in Sources */,
+				204D20C024BB38F7001BDDFC /* SearchFeedViewModel.swift in Sources */,
+				2037665324B6314800A7089F /* PosterImageView.swift in Sources */,
+				20604DAE24C03D9B0089CD77 /* PersistanceDIPart.swift in Sources */,
+				204D20B924BB2D17001BDDFC /* SearchGameStreams.swift in Sources */,
 				203644BD24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift in Sources */,
 				20893A5A24B240E2006A8964 /* Rx + Extensions.swift in Sources */,
-				204831CC24B8C93300361B50 /* TwitchStream.swift in Sources */,
-				204831D624B8CFD200361B50 /* TwitchStreamsFeedViewController.swift in Sources */,
+				20604DB324C0688F0089CD77 /* FavoriteGamesFeedDIPart.swift in Sources */,
+				204831CC24B8C93300361B50 /* Stream.swift in Sources */,
+				2055C5CD24C0B56C0067D5FF /* UIVIewController + Extensions.swift in Sources */,
+				2039D14424BF52FE000BF6F9 /* SearchChannelCell.swift in Sources */,
+				20604DB124C0686C0089CD77 /* FavoriteGamesFeedCoordinator.swift in Sources */,
+				2039D13C24BF4EE0000BF6F9 /* ChannelSearchController.swift in Sources */,
+				204831D624B8CFD200361B50 /* StreamsFeedViewController.swift in Sources */,
+				2039D14624BF595F000BF6F9 /* CheckMarkView.swift in Sources */,
 				20EF351224B11C580082FA67 /* DotMenuButton.swift in Sources */,
 				2042D9BA24B3793D007C8E5E /* UIScrollView + Extensions.swift in Sources */,
-				204831CF24B8C9D900361B50 /* TwitchStreamsFeedViewModel.swift in Sources */,
+				204831CF24B8C9D900361B50 /* StreamsFeedViewModel.swift in Sources */,
+				2077AE7424BD650D006C2BE4 /* SearchTypeSegmentedControl.swift in Sources */,
 				20EF351124B11C580082FA67 /* TopGamesStreamsFeedViewModel.swift in Sources */,
+				2039D13E24BF4F9E000BF6F9 /* ChannelSearchResponse.swift in Sources */,
 				20FD59A724B19FA4008DD901 /* AppCoordinator.swift in Sources */,
-				20EF350E24B11C580082FA67 /* TwitchGame.swift in Sources */,
+				20EF350E24B11C580082FA67 /* Game.swift in Sources */,
 				20EF34D524B11AC30082FA67 /* AppDelegate.swift in Sources */,
-				204831DB24B8D18100361B50 /* TwitchStreamCell.swift in Sources */,
+				204831DB24B8D18100361B50 /* StreamCell.swift in Sources */,
 				203644B724B1D7DC00C31BC9 /* TopGamesStreamsFeedDIPart.swift in Sources */,
+				204D20BC24BB37EF001BDDFC /* SearchFeedCoordinator.swift in Sources */,
+				204D20BE24BB38DE001BDDFC /* SearchFeedViewController.swift in Sources */,
 				204831D224B8CA5700361B50 /* TwitchStreamsFeedModelConverter.swift in Sources */,
-				20EF351424B11C580082FA67 /* TwitchGameCell.swift in Sources */,
+				20EF351424B11C580082FA67 /* GameCell.swift in Sources */,
 				203644B124B1D32100C31BC9 /* AppFramework.swift in Sources */,
+				2077AE7624BD6BAC006C2BE4 /* StreamSearchController.swift in Sources */,
 				20FDFFB424B39F2E00FA5133 /* WebKitViewController.swift in Sources */,
-				2042D9BE24B37A11007C8E5E /* TwitchFeaturedStream.swift in Sources */,
+				204D20C524BB4253001BDDFC /* SearchTextFieldView.swift in Sources */,
+				2042D9BE24B37A11007C8E5E /* FeaturedStreamsResponse.swift in Sources */,
+				204D20C224BB3A3F001BDDFC /* SearchFeedDIPart.swift in Sources */,
 				20EF350F24B11C580082FA67 /* HTTPClient.swift in Sources */,
 				203644B924B1DF7400C31BC9 /* Protocols.swift in Sources */,
 				203644B524B1D37600C31BC9 /* CoordinatorDIPart.swift in Sources */,
+				20604DAA24C0389F0089CD77 /* RealmGame.swift in Sources */,
 				20EF351024B11C580082FA67 /* TwitchAPI.swift in Sources */,
 				20EF351524B11C580082FA67 /* TopGamesStreamsFeedViewController.swift in Sources */,
+				20604DA824C0387D0089CD77 /* DatabaseManager.swift in Sources */,
 				204831D424B8CA9B00361B50 /* TwitchStreamsFeedDIPart.swift in Sources */,
 				20EF351324B11C580082FA67 /* SlideMenuItemCell.swift in Sources */,
+				20604DAC24C03CFF0089CD77 /* NotificationCenter + Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

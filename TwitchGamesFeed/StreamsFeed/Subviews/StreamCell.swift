@@ -10,10 +10,10 @@ import Nuke
 import SnapKit
 import UIKit
 
-class TwitchStreamCell: UITableViewCell {
+class StreamCell: UITableViewCell {
     
-    private let liveTitleView: PosterImageViewBaseView = {
-        let liveTitleView = PosterImageViewBaseView()
+    private let liveTitleView: PosterImageView = {
+        let liveTitleView = PosterImageView()
         liveTitleView.labelFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
         liveTitleView.labelTitle = "Live"
         liveTitleView.fontColor = .white
@@ -27,6 +27,7 @@ class TwitchStreamCell: UITableViewCell {
     
     private let posterImageContaierView: UIView = {
         let posterImageContaierView = UIView()
+        posterImageContaierView.backgroundColor = .black
         return posterImageContaierView
     }()
     
@@ -44,16 +45,16 @@ class TwitchStreamCell: UITableViewCell {
         return titleLabel
     }()
     
-    private let viewersCountLabel: PosterImageViewBaseView = {
-        let viewersCountLabel = PosterImageViewBaseView()
+    private let viewersCountLabel: PosterImageView = {
+        let viewersCountLabel = PosterImageView()
         viewersCountLabel.labelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         viewersCountLabel.backgroundColor = .black
         viewersCountLabel.fontColor = .white
         return viewersCountLabel
     }()
     
-    private let gameTagLabel: PosterImageViewBaseView = {
-        let gameTagLabel = PosterImageViewBaseView()
+    private let gameTagLabel: PosterImageView = {
+        let gameTagLabel = PosterImageView()
         gameTagLabel.labelFont = UIFont.systemFont(ofSize: 14, weight: .medium)
         gameTagLabel.fontColor = .black
         gameTagLabel.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
@@ -62,9 +63,11 @@ class TwitchStreamCell: UITableViewCell {
     
     //private let gameTagLabel = TwitchFeaturedStreamTagView()
     
-    var featuredStream: TwitchStreamInfo! {
+    var featuredStream: Stream! {
         didSet {
-            let prepString = featuredStream.thumbnailUrl.replacingOccurrences(of: "{width}x{height}", with: "720x1136")
+            let prepString =
+                featuredStream.thumbnailUrl.replacingOccurrences(of: "{width}x{height}",
+                                                                 with: "720x1136")
             guard let url = URL(string: prepString) else { return }
             Nuke.loadImage(with: url, into: posterImageView)
             titleLabel.text = featuredStream.title
@@ -147,7 +150,7 @@ class TwitchStreamCell: UITableViewCell {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(posterImageContaierView.snp.bottom).offset(10)
             make.leading.equalTo(gameTagLabel.snp.trailing).offset(8)
-            make.trailing.lessThanOrEqualToSuperview().offset(-24)
+            make.trailing.equalToSuperview().offset(-24)
             make.bottom.equalToSuperview().offset(-28)
         }
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)

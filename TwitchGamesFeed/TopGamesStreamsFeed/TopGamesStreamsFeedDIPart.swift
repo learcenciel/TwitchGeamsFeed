@@ -10,7 +10,7 @@ import DITranquillity
 
 class TopGamesStreamsFeedDIPart: DIPart {
     static func load(container: DIContainer) {
-        container.register(TopGamesStreamsFeedViewController.init)
+        container.register { TopGamesStreamsFeedViewController() }
             .lifetime(.prototype)
         
         container.register(TopGamesStreamsFeedViewModel.init)

@@ -13,7 +13,7 @@ class SlideMenuItemCell: UITableViewCell {
     
     static let cellId = "cellId"
     
-    let menuItemLabel: UILabel = {
+    private let menuItemLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.textColor = .white
@@ -35,7 +35,7 @@ class SlideMenuItemCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupViews() {
+    private func setupViews() {
         addSubview(menuItemLabel)
         
         menuItemLabel.snp.makeConstraints { make in

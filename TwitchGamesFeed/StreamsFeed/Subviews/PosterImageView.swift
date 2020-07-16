@@ -9,7 +9,7 @@
 import SnapKit
 import UIKit
 
-class PosterImageViewBaseView: UIView {
+class PosterImageView: UIView {
     
     var labelFont: UIFont = UIFont.systemFont(ofSize: 14, weight: .medium) {
         didSet {
@@ -39,8 +39,8 @@ class PosterImageViewBaseView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        clipsToBounds = true
         backgroundColor = .red
+        clipsToBounds = true
         layer.cornerRadius = 4
         configureTitle()
     }

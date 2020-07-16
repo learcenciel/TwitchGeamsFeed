@@ -12,7 +12,7 @@ import RxSwift
 import SnapKit
 import UIKit
 
-class TwitchStreamsFeedViewController: UIViewController {
+class StreamsFeedViewController: UIViewController {
     
     private lazy var featuredStreamsTableView: UITableView = {
         let featuredStreamsTableView = UITableView()
@@ -27,39 +27,34 @@ class TwitchStreamsFeedViewController: UIViewController {
                             color: UIColor(red: 85/255, green: 26/255, blue: 173/255, alpha: 1.0),
                             padding: .none)
     
-    var featuredStreamsViewModel: TwitchStreamsFeedViewModel?
-    private let featuredStreams: BehaviorRelay<[TwitchStreamInfo]> = BehaviorRelay(value: [])
+    private let featuredStreams: BehaviorRelay<[Stream]> = BehaviorRelay(value: [])
     private let disposeBag = DisposeBag()
+    private var offset = 0
+    
+    var featuredStreamsViewModel: StreamsFeedViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureStreamsTableView()
-        configureBindings()
-        featuredStreamsViewModel?.fetchStreamList()
         view.backgroundColor = .white
+        
+        configureBindings()
+        configureStreamsTableView()
+        
+        featuredStreamsViewModel?.fetchStreamList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.barTintColor = .white
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.layoutIfNeeded()
-        self.navigationController?.navigationBar.tintColor = .black
-        self.title = "Featured"
-        self.navigationController!.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold),
-            NSAttributedString.Key.foregroundColor: UIColor.black
-        ]
+        configureNavigationBarBeforeAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+        configureNavigationBarBeforeDisappear()
     }
     
     // MARK: Views configure methods
+    
     
     private func configureBindings() {
         disposeBag += featuredStreamsViewModel?
@@ -67,11 +62,11 @@ class TwitchStreamsFeedViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .bind(to: self.featuredStreams)
         
-        disposeBag += featuredStreams.bind(to: featuredStreamsTableView.rx.items(cellIdentifier: "cellId", cellType: TwitchStreamCell.self)) { row, featuredStream, cell in
+        disposeBag += featuredStreams.bind(to: featuredStreamsTableView.rx.items(cellIdentifier: "cellId", cellType: StreamCell.self)) { row, featuredStream, cell in
             cell.featuredStream = featuredStream
         }
         
-        disposeBag += featuredStreamsTableView.rx.modelSelected(TwitchStreamInfo.self)
+        disposeBag += featuredStreamsTableView.rx.modelSelected(Stream.self)
             .subscribe(onNext: { [unowned self] stream in
                 self.featuredStreamsViewModel?.featuredStreamTapped.onNext(stream)
             })
@@ -97,12 +92,13 @@ class TwitchStreamsFeedViewController: UIViewController {
             .subscribe(onNext: { [unowned self] offset in
                 if self.featuredStreamsTableView.isNearBottomEdge(edgeOffset: 20) && !self.featuredStreamsViewModel!.isLoading {
                     self.featuredStreamsViewModel!.isLoading = true
-                    self.featuredStreamsViewModel?.fetchNextGamesList()
+                    self.offset += 10
+                    self.featuredStreamsViewModel?.fetchNextStreamsList(with: self.offset)
                 }
             })
     }
     
-    func configureStreamsTableView() {
+    private func configureStreamsTableView() {
         self.view.addSubview(featuredStreamsTableView)
         
         featuredStreamsTableView.tableFooterView = footerView
@@ -118,7 +114,8 @@ class TwitchStreamsFeedViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
         
-        featuredStreamsTableView.register(TwitchStreamCell.self, forCellReuseIdentifier: "cellId")
+        featuredStreamsTableView.register(StreamCell.self, forCellReuseIdentifier: "cellId")
         featuredStreamsTableView.rowHeight = UITableView.automaticDimension
     }
+    
 }

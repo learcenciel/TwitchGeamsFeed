@@ -32,3 +32,23 @@ extension Coordinator {
         }
     }
 }
+
+protocol SearchTypeSegmentedControlDelegate {
+    func didSelect(item at: Int)
+}
+
+protocol SearchCapable: UITableViewDelegate, UITableViewDataSource {
+    func search(query: String, offset: Int)
+}
+
+protocol StreamSearchControllerDelegate {
+    var searchFeedViewModel: SearchFeedViewModel! { get set }
+    func didRetreiveStreams()
+    func didSelectStream(twitchStream: Stream)
+}
+
+protocol ChannelSearchControllerDelegate {
+    var searchFeedViewModel: SearchFeedViewModel! { get set }
+    func didRetreiveChannels()
+    func didSelectChannel(channel: SearchChannel)
+}

@@ -13,5 +13,8 @@ public class AppFramework: DIFramework {
         container.append(part: CoordinatorDIPart.self)
         container.append(part: TopGamesStreamsFeedDIPart.self)
         container.append(part: TwitchStreamsFeedDIPart.self)
+        container.append(part: SearchFeedDIPart.self)
+        container.append(part: FavoriteGamesFeedDIPart.self)
+        container.append(part: PersistanceDIPart.self)
     }
 }

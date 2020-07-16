@@ -10,10 +10,10 @@ import DITranquillity
 
 class TwitchStreamsFeedDIPart: DIPart {
     static func load(container: DIContainer) {
-        container.register(TwitchStreamsFeedViewController.init)
+        container.register { StreamsFeedViewController() }
             .lifetime(.prototype)
         
-        container.register(TwitchStreamsFeedViewModel.init)
+        container.register(StreamsFeedViewModel.init)
             .lifetime(.prototype)
         
         container.register(TwitchStreamsFeedModelConverter.init)

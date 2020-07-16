@@ -10,7 +10,7 @@ import Nuke
 import SnapKit
 import UIKit
 
-class TwitchGameCell: UICollectionViewCell {
+class GameCell: UICollectionViewCell {
     
     private let containerView: UIView = {
         let containerView = UIView()
@@ -41,13 +41,25 @@ class TwitchGameCell: UICollectionViewCell {
         return viewersCountLabel
     }()
     
-    var twitchGame: TwitchGameResponse! {
+    private let likeButton: UIButton = {
+        let likeButton = UIButton()
+        let imageOff = UIImage(named: "like_off")
+        likeButton.setImage(imageOff, for: .normal)
+        return likeButton
+    }()
+        
+    private let databaseManager = DatabaseManager()
+    
+    var twitchGame: GameResponse! {
         didSet {
             let prepString = twitchGame.game.imageBox.gameUrlPath.replacingOccurrences(of: "{width}x{height}", with: "720x1136")
             guard let url = URL(string: prepString) else { return }
             Nuke.loadImage(with: url, into: posterImageView)
             titleLabel.text = twitchGame.game.name
             viewersCountLabel.text = "\(twitchGame.viewersCount) viewers"
+            databaseManager.isFavorite(gameResponse: twitchGame) ?
+                self.likeButton.setImage(UIImage(named: "like_on"), for: .normal) :
+                self.likeButton.setImage(UIImage(named: "like_off"), for: .normal)
         }
     }
     
@@ -56,9 +68,32 @@ class TwitchGameCell: UICollectionViewCell {
         self.posterImageView.image = nil
         self.titleLabel.text = ""
     }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateGame(_:)), name: .didUpdateGame, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .didUpdateGame, object: nil)
+    }
+    
+    @objc func didUpdateGame(_ notification: Notification) {
+        databaseManager.isFavorite(gameResponse: twitchGame) == false ?
+            self.likeButton.setImage(UIImage(named: "like_off"), for: .normal) :
+            self.likeButton.setImage(UIImage(named: "like_on"), for: .normal)
+    }
+    
+    @objc func likeButtonPressed(_ sender: UIButton) {
+        let boolka = databaseManager.isFavorite(gameResponse: twitchGame)
+        if boolka {
+            print("delete")
+            databaseManager.delete(gameResponse: twitchGame)
+        } else {
+            print("save")
+            databaseManager.saveGame(twitchGame)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -78,6 +113,7 @@ class TwitchGameCell: UICollectionViewCell {
         containerView.addSubview(posterImageView)
         containerView.addSubview(titleLabel)
         containerView.addSubview(viewersCountLabel)
+        containerView.addSubview(likeButton)
         containerView.layer.cornerRadius = 18
         containerView.clipsToBounds = true
         containerView.backgroundColor = UIColor(red: 85/255, green: 26/255, blue: 173/255, alpha: 1.0)
@@ -104,5 +140,12 @@ class TwitchGameCell: UICollectionViewCell {
             make.leading.equalTo(titleLabel.snp.leading)
             make.trailing.lessThanOrEqualTo(containerView.snp.trailing).offset(-14)
         }
+        
+        likeButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-24)
+            make.trailing.equalToSuperview().offset(-24)
+            make.height.width.equalTo(24)
+        }
+        likeButton.addTarget(self, action: #selector(likeButtonPressed(_:)), for: .touchUpInside)
     }
 }

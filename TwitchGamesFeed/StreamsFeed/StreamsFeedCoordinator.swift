@@ -10,39 +10,38 @@ import Foundation
 import RxSwift
 import UIKit
 
-class TwitchStreamsFeedCoordinator: NSObject, Coordinator {
+class StreamsFeedCoordinator: NSObject, Coordinator {
     
     var navigationController: UINavigationController?
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     
     private let disposeBag = DisposeBag()
-    private let twitchStreamsFeedViewController: TwitchStreamsFeedViewController
-    private let twitchStreamsFeedViewModel: TwitchStreamsFeedViewModel
+    let streamsFeedViewController: StreamsFeedViewController
+    let streamsFeedViewModel: StreamsFeedViewModel
     
-    init(twitchStreamsFeedViewController: TwitchStreamsFeedViewController,
-                  twitchStreamsFeedViewModel: TwitchStreamsFeedViewModel) {
-        self.twitchStreamsFeedViewController = twitchStreamsFeedViewController
-        self.twitchStreamsFeedViewModel = twitchStreamsFeedViewModel
+    init(twitchStreamsFeedViewController: StreamsFeedViewController,
+         twitchStreamsFeedViewModel: StreamsFeedViewModel) {
+        self.streamsFeedViewController = twitchStreamsFeedViewController
+        self.streamsFeedViewModel = twitchStreamsFeedViewModel
     }
     
     func start() {
         self.navigationController?.delegate = self
-        self.twitchStreamsFeedViewController.featuredStreamsViewModel = self.twitchStreamsFeedViewModel
-        disposeBag += self.twitchStreamsFeedViewModel.featuredStreamTapped
+        self.streamsFeedViewController.featuredStreamsViewModel = self.streamsFeedViewModel
+        disposeBag += self.streamsFeedViewModel.featuredStreamTapped
             .subscribe(onNext: { [unowned self] streamUrl in
                 let wkVC = WebKitViewController()
                 wkVC.streamUrl = streamUrl.userName
                 self.navigationController?.pushViewController(wkVC, animated: true)
             })
-        
-        self.navigationController?.pushViewController(self.twitchStreamsFeedViewController, animated: true)
+        self.navigationController?.pushViewController(self.streamsFeedViewController, animated: true)
     }
 }
 
-extension TwitchStreamsFeedCoordinator: UINavigationControllerDelegate {
+extension StreamsFeedCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        if !navigationController.children.contains(self.twitchStreamsFeedViewController) {
+        if !navigationController.children.contains(self.streamsFeedViewController) {
             self.parentCoordinator?.didFinish(coordinator: self)
         }
     }

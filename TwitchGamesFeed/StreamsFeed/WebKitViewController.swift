@@ -58,6 +58,3 @@ class WebKitViewController: UIViewController {
         loadUrl()
     }
 }
-
-extension WebKitViewController: WKNavigationDelegate {
-}
