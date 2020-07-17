@@ -37,7 +37,9 @@ class DatabaseManager {
         try! realm.write {
             realm.delete(realm.objects(RealmGame.self).filter("id=%@", gameResponse.game.id))
         }
-        NotificationCenter.default.post(name: .didUpdateGame, object: nil, userInfo: nil)
+        NotificationCenter.default.post(name: .didUpdateGame,
+                                        object: nil,
+                                        userInfo: createUserInfo(gameResponse, isFavorite: false))
     }
     
     func saveGame(_ gameResponse: GameResponse) {
@@ -48,6 +50,16 @@ class DatabaseManager {
                                        viewersCount: gameResponse.viewersCount)
             realm.create(RealmGame.self, value: game, update: .all)
         }
-        NotificationCenter.default.post(name: .didUpdateGame, object: nil, userInfo: nil)
+        NotificationCenter.default.post(name: .didUpdateGame,
+                                        object: nil,
+                                        userInfo: createUserInfo(gameResponse, isFavorite: true))
+    }
+    
+    private func createUserInfo(_ gameResponse: GameResponse,
+                                isFavorite: Bool) -> [String: RealmGameNotification] {
+        let realmGameNotification = RealmGameNotification(gameId: gameResponse.game.id,
+                                                          isFavorite: isFavorite)
+        let userInfo: [String: RealmGameNotification] = ["game": realmGameNotification]
+        return userInfo
     }
 }

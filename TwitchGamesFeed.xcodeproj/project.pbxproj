@@ -13,6 +13,7 @@
 		203644B924B1DF7400C31BC9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203644B824B1DF7400C31BC9 /* Protocols.swift */; };
 		203644BD24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203644BC24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift */; };
 		2037665324B6314800A7089F /* PosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2037665224B6314800A7089F /* PosterImageView.swift */; };
+		2038F11024C19CC300656F1A /* RealmGameNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2038F10F24C19CC300656F1A /* RealmGameNotification.swift */; };
 		2039D13C24BF4EE0000BF6F9 /* ChannelSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039D13B24BF4EE0000BF6F9 /* ChannelSearchController.swift */; };
 		2039D13E24BF4F9E000BF6F9 /* ChannelSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039D13D24BF4F9E000BF6F9 /* ChannelSearchResponse.swift */; };
 		2039D14424BF52FE000BF6F9 /* SearchChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2039D14324BF52FE000BF6F9 /* SearchChannelCell.swift */; };
@@ -67,6 +68,7 @@
 		203644B824B1DF7400C31BC9 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		203644BC24B1DFC800C31BC9 /* TopGamesFeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesFeedCoordinator.swift; sourceTree = "<group>"; };
 		2037665224B6314800A7089F /* PosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageView.swift; sourceTree = "<group>"; };
+		2038F10F24C19CC300656F1A /* RealmGameNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmGameNotification.swift; sourceTree = "<group>"; };
 		2039D13B24BF4EE0000BF6F9 /* ChannelSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSearchController.swift; sourceTree = "<group>"; };
 		2039D13D24BF4F9E000BF6F9 /* ChannelSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelSearchResponse.swift; sourceTree = "<group>"; };
 		2039D14324BF52FE000BF6F9 /* SearchChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchChannelCell.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				204831D024B8CA2300361B50 /* Converters */,
 				20EF350324B11C580082FA67 /* Game.swift */,
 				20604DA924C0389F0089CD77 /* RealmGame.swift */,
+				2038F10F24C19CC300656F1A /* RealmGameNotification.swift */,
 				204831CB24B8C93300361B50 /* Stream.swift */,
 				2042D9BD24B37A11007C8E5E /* FeaturedStreamsResponse.swift */,
 				204D20B824BB2D17001BDDFC /* SearchGameStreams.swift */,
@@ -468,6 +471,7 @@
 				20893A5A24B240E2006A8964 /* Rx + Extensions.swift in Sources */,
 				20604DB324C0688F0089CD77 /* FavoriteGamesFeedDIPart.swift in Sources */,
 				204831CC24B8C93300361B50 /* Stream.swift in Sources */,
+				2038F11024C19CC300656F1A /* RealmGameNotification.swift in Sources */,
 				2055C5CD24C0B56C0067D5FF /* UIVIewController + Extensions.swift in Sources */,
 				2039D14424BF52FE000BF6F9 /* SearchChannelCell.swift in Sources */,
 				20604DB124C0686C0089CD77 /* FavoriteGamesFeedCoordinator.swift in Sources */,

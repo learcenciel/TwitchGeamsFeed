@@ -47,11 +47,12 @@ class TopGamesStreamsFeedViewController: UIViewController {
         return containerView
     }()
     
+    private let disposeBag = DisposeBag()
+    
     private var isMenuExpanded = false
     private var dragMenuWidth: CGFloat = 0
     
     private var twitchGames: BehaviorRelay<[GameResponse]> = BehaviorRelay(value: [])
-    private let disposeBag = DisposeBag()
     var topGamesStreamsViewModel: TopGamesStreamsFeedViewModel?
 
     override func viewDidLoad() {
@@ -80,8 +81,14 @@ class TopGamesStreamsFeedViewController: UIViewController {
             cell.setup(slideMenuItem.rawValue)
         }
             
-        disposeBag += twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: GameCell.self)) {row, game, cell in
+        disposeBag += twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: GameCell.self)) { row, game, cell in
+            cell.isFavorite = self.topGamesStreamsViewModel!.databaseManager.isFavorite(gameResponse: game)
             cell.twitchGame = game
+            cell.onFavoriteChanged = { [weak self] isFavorite in
+                isFavorite ?
+                    self?.topGamesStreamsViewModel?.databaseManager.saveGame(cell.twitchGame) :
+                    self?.topGamesStreamsViewModel?.databaseManager.delete(gameResponse: cell.twitchGame)
+            }
         }
         
         disposeBag += slideMenuTableView.rx.itemSelected.subscribe(onNext: { indexPath in

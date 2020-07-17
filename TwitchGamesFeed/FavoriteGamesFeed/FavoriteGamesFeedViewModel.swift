@@ -13,7 +13,7 @@ import RxSwift
 class FavoriteGamesFeedViewModel {
     
     private let apiManager: TwitchAPI
-    private let databaseManager: DatabaseManager
+    let databaseManager: DatabaseManager
     
     init(apiManager: TwitchAPI,
          databaseManager: DatabaseManager) {

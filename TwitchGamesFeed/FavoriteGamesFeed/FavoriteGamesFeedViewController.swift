@@ -19,23 +19,16 @@ class FavoriteGamesFeedViewController: UIViewController {
         return streamsCollectionView
     }()
     
-    private let streamsCollectionViewContainerView: UIView = {
-        let containerView = UIView()
-        containerView.backgroundColor = .white
-        return containerView
-    }()
-    
     private var twitchGames: PublishSubject<[GameResponse]> = PublishSubject()
     private let disposeBag = DisposeBag()
     var favoriteGamesFeedViewModel: FavoriteGamesFeedViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureStreamsCollectionViewContainerView()
+        view.backgroundColor = .white
         configureStreamsCollectionView()
         configureBindings()
         favoriteGamesFeedViewModel?.fetchGamesList()
-        view.backgroundColor = .white
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,8 +58,14 @@ class FavoriteGamesFeedViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .bind(to: self.twitchGames)
             
-        disposeBag += twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: GameCell.self)) {row, game, cell in
+        disposeBag += twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: GameCell.self)) { row, game, cell in
+            cell.isFavorite = self.favoriteGamesFeedViewModel!.databaseManager.isFavorite(gameResponse: game)
             cell.twitchGame = game
+            cell.onFavoriteChanged = { [weak self] isFavorite in
+                isFavorite ?
+                    self?.favoriteGamesFeedViewModel?.databaseManager.saveGame(cell.twitchGame) :
+                    self?.favoriteGamesFeedViewModel?.databaseManager.delete(gameResponse: cell.twitchGame)
+            }
         }
         
         disposeBag += streamsCollectionView.rx.modelSelected(GameResponse.self).subscribe(onNext: { [unowned self] game in
@@ -74,25 +73,15 @@ class FavoriteGamesFeedViewController: UIViewController {
         })
     }
     
-    private func configureStreamsCollectionViewContainerView() {
-        view.addSubview(streamsCollectionViewContainerView)
-        streamsCollectionViewContainerView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
-    }
-    
     private func configureStreamsCollectionView() {
-        streamsCollectionViewContainerView.addSubview(streamsCollectionView)
+        self.view.addSubview(streamsCollectionView)
         
         streamsCollectionView.showsVerticalScrollIndicator = false
         streamsCollectionView.showsHorizontalScrollIndicator = false
         
         streamsCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(24)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.bottom.equalToSuperview()
         }
         
         streamsCollectionView.register(GameCell.self, forCellWithReuseIdentifier: "cellId")

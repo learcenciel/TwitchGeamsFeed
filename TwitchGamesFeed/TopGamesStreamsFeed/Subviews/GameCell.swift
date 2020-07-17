@@ -47,8 +47,9 @@ class GameCell: UICollectionViewCell {
         likeButton.setImage(imageOff, for: .normal)
         return likeButton
     }()
-        
-    private let databaseManager = DatabaseManager()
+            
+    var isFavorite: Bool = false
+    var onFavoriteChanged: ((Bool) -> Void)?
     
     var twitchGame: GameResponse! {
         didSet {
@@ -57,7 +58,7 @@ class GameCell: UICollectionViewCell {
             Nuke.loadImage(with: url, into: posterImageView)
             titleLabel.text = twitchGame.game.name
             viewersCountLabel.text = "\(twitchGame.viewersCount) viewers"
-            databaseManager.isFavorite(gameResponse: twitchGame) ?
+            isFavorite ?
                 self.likeButton.setImage(UIImage(named: "like_on"), for: .normal) :
                 self.likeButton.setImage(UIImage(named: "like_off"), for: .normal)
         }
@@ -80,20 +81,21 @@ class GameCell: UICollectionViewCell {
     }
     
     @objc func didUpdateGame(_ notification: Notification) {
-        databaseManager.isFavorite(gameResponse: twitchGame) == false ?
-            self.likeButton.setImage(UIImage(named: "like_off"), for: .normal) :
-            self.likeButton.setImage(UIImage(named: "like_on"), for: .normal)
+        guard
+            let userInfo = notification.userInfo as? [String: RealmGameNotification],
+            let gameNotification = userInfo["game"]
+        else { return }
+        
+        if gameNotification.gameId == self.twitchGame.game.id {
+            gameNotification.isFavorite ?
+                self.likeButton.setImage(UIImage(named: "like_on"), for: .normal) :
+                self.likeButton.setImage(UIImage(named: "like_off"), for: .normal)
+        }
     }
     
     @objc func likeButtonPressed(_ sender: UIButton) {
-        let boolka = databaseManager.isFavorite(gameResponse: twitchGame)
-        if boolka {
-            print("delete")
-            databaseManager.delete(gameResponse: twitchGame)
-        } else {
-            print("save")
-            databaseManager.saveGame(twitchGame)
-        }
+        self.isFavorite = !self.isFavorite
+        self.onFavoriteChanged?(isFavorite)
     }
     
     required init?(coder: NSCoder) {

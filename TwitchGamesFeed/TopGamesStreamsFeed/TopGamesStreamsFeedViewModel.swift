@@ -18,9 +18,12 @@ class TopGamesStreamsFeedViewModel {
     
     private let apiManager: TwitchAPI
     private let disposable = DisposeBag()
+    let databaseManager: DatabaseManager
     
-    init(apiManager: TwitchAPI) {
+    init(apiManager: TwitchAPI,
+         databaseManager: DatabaseManager) {
         self.apiManager = apiManager
+        self.databaseManager = databaseManager
     }
     
     let slideMenuItems: BehaviorRelay<[SlideMenuItemType]> = BehaviorRelay(value: [])
