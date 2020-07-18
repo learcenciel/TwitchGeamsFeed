@@ -1,6 +1,16 @@
 PODS:
   - Alamofire (5.0.2)
+  - DITranquillity (3.9.3):
+    - SwiftLazy
   - Nuke (9.1.1)
+  - NVActivityIndicatorView (5.0.0):
+    - NVActivityIndicatorView/Base (= 5.0.0)
+  - NVActivityIndicatorView/Base (5.0.0)
+  - Realm (4.3.2):
+    - Realm/Headers (= 4.3.2)
+  - Realm/Headers (4.3.2)
+  - RealmSwift (4.3.2):
+    - Realm (= 4.3.2)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -8,10 +18,14 @@ PODS:
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
   - SnapKit (5.0.1)
+  - SwiftLazy (1.1.7)
 
 DEPENDENCIES:
   - Alamofire
+  - DITranquillity
   - Nuke
+  - NVActivityIndicatorView
+  - RealmSwift
   - RxCocoa
   - RxSwift
   - SnapKit
@@ -19,20 +33,30 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - DITranquillity
     - Nuke
+    - NVActivityIndicatorView
+    - Realm
+    - RealmSwift
     - RxCocoa
     - RxRelay
     - RxSwift
     - SnapKit
+    - SwiftLazy
 
 SPEC CHECKSUMS:
   Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
+  DITranquillity: 7aba075b73dbb1f321a1218dd3d9f1bd5ad9427b
   Nuke: af4301b154d3afd8a3b045a5194a9a773a00b7a8
+  NVActivityIndicatorView: f109ed069924ac1b4adbc1ae9cfaeac0be1d6c2c
+  Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
+  RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftLazy: dcb1edc6c2b633ba2e68f28554d9dd6d1c0bfd13
 
-PODFILE CHECKSUM: 90874f53f7bad86d43e10e8576f75f80f2235ec9
+PODFILE CHECKSUM: e11dc75bd1f4bc73629a4e6f5a50b7501d146e5b
 
 COCOAPODS: 1.8.3

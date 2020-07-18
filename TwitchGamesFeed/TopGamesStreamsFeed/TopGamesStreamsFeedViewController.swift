@@ -6,12 +6,28 @@
 //  Copyright © 2020 Alexander Team. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 import SnapKit
 import UIKit
 
 class TopGamesStreamsFeedViewController: UIViewController {
+    
+    private lazy var screenTypeTitleLabel: UILabel = {
+        let screenTitleLabel = UILabel()
+        screenTitleLabel.text = "Popular Today"
+        screenTitleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        screenTitleLabel.numberOfLines = 1
+        screenTitleLabel.textColor = .black
+        screenTitleLabel.textAlignment = .center
+        return screenTitleLabel
+    }()
+    
+    private lazy var streamsCollectionView: UICollectionView = {
+        let streamsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        streamsCollectionView.backgroundColor = .clear
+        return streamsCollectionView
+    }()
     
     private lazy var slideMenuTableView: UITableView = {
         let tv = UITableView()
@@ -19,8 +35,6 @@ class TopGamesStreamsFeedViewController: UIViewController {
         tv.isScrollEnabled = false
         tv.rowHeight = 58
         tv.backgroundColor = .clear
-        tv.delegate = self
-        tv.dataSource = self
         tv.register(SlideMenuItemCell.self, forCellReuseIdentifier: SlideMenuItemCell.cellId)
         return tv
     }()
@@ -33,43 +47,64 @@ class TopGamesStreamsFeedViewController: UIViewController {
         return containerView
     }()
     
-    private lazy var streamsCollectionView: UICollectionView = {
-        let streamsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        streamsCollectionView.backgroundColor = .clear
-        return streamsCollectionView
-    }()
+    private let disposeBag = DisposeBag()
     
     private var isMenuExpanded = false
     private var dragMenuWidth: CGFloat = 0
     
-    private let slideMenuItems = ["Best Today", "Categories", "Search", "About App"]
-    private var topGamesStreamsViewModel = TopGamesStreamsFeedViewModel()
-    private var twitchGames: PublishSubject<[TwitchGame]> = PublishSubject()
-    private let disposeBag = DisposeBag()
-    
+    private var twitchGames: BehaviorRelay<[GameResponse]> = BehaviorRelay(value: [])
+    var topGamesStreamsViewModel: TopGamesStreamsFeedViewModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(red: 85/255, green: 26/255, blue: 173/255, alpha: 1.0)
+
+        configureBindings()
         configureSlideMenuTableView()
         configureStreamsCollectionViewContainerView()
         configureDotViewButton()
+        configureScreenTypeTitleLabel()
         configureStreamsCollectionView()
-        configureBindings()
-        topGamesStreamsViewModel.fetchGamesList()
-        view.backgroundColor = UIColor(red: 85/255, green: 26/255, blue: 173/255, alpha: 1.0)
+        
+        topGamesStreamsViewModel?.fetchGamesList()
     }
-    
     // MARK: Views configure methods
     
     private func configureBindings() {
-        topGamesStreamsViewModel
+        disposeBag += topGamesStreamsViewModel?
             .topGames
             .observeOn(MainScheduler.instance)
             .bind(to: self.twitchGames)
-            .disposed(by: disposeBag)
         
-        twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: TwitchGameCell.self)) {row, game, cell in
+        disposeBag += topGamesStreamsViewModel?.slideMenuItems.bind(to: slideMenuTableView.rx.items(cellIdentifier: "cellId", cellType: SlideMenuItemCell.self)) { row, slideMenuItem, cell in
+            cell.setup(slideMenuItem.rawValue)
+        }
+            
+        disposeBag += twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: GameCell.self)) { row, game, cell in
+            cell.isFavorite = self.topGamesStreamsViewModel!.databaseManager.isFavorite(gameResponse: game)
             cell.twitchGame = game
-        }.disposed(by: disposeBag)
+            cell.onFavoriteChanged = { [weak self] isFavorite in
+                isFavorite ?
+                    self?.topGamesStreamsViewModel?.databaseManager.saveGame(cell.twitchGame) :
+                    self?.topGamesStreamsViewModel?.databaseManager.delete(gameResponse: cell.twitchGame)
+            }
+        }
+        
+        disposeBag += slideMenuTableView.rx.itemSelected.subscribe(onNext: { indexPath in
+            self.topGamesStreamsViewModel?.slideMenuItemTapped.onNext(SlideMenuItemType.allCases[indexPath.row])
+        })
+        
+        disposeBag += streamsCollectionView.rx.modelSelected(GameResponse.self).subscribe(onNext: { [unowned self] game in
+            self.topGamesStreamsViewModel?.gameTapped.onNext(game)
+        })
+        
+        disposeBag += topGamesStreamsViewModel?.gameTapped.subscribe(onNext: { [unowned self] _ in
+            if self.isMenuExpanded { self.toggleMenu() }
+        })
+        
+        disposeBag += topGamesStreamsViewModel?.error.subscribe(onNext: { error in
+            print(error)
+        })
     }
     
     private func configureSlideMenuTableView() {
@@ -94,6 +129,29 @@ class TopGamesStreamsFeedViewController: UIViewController {
         streamsCollectionViewContainerView.addGestureRecognizer(panGesture)
     }
     
+    private func configureDotViewButton() {
+        dotButtonView.onTap = { [weak self] in
+            self?.toggleMenu()
+        }
+        
+        streamsCollectionViewContainerView.addSubview(dotButtonView)
+        dotButtonView.snp.makeConstraints { make in
+            make.leading.equalTo(streamsCollectionViewContainerView.snp.leading).offset(24)
+            make.top.equalTo(streamsCollectionViewContainerView.snp.topMargin).offset(14)
+            make.size.equalTo(18)
+        }
+    }
+    
+    private func configureScreenTypeTitleLabel() {
+        self.screenTypeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.streamsCollectionViewContainerView.addSubview(screenTypeTitleLabel)
+        self.screenTypeTitleLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(dotButtonView)
+            make.leading.equalTo(dotButtonView.snp.trailing).offset(14)
+            make.trailing.equalToSuperview().offset(-24)
+        }
+    }
+    
     private func configureStreamsCollectionView() {
         streamsCollectionViewContainerView.addSubview(streamsCollectionView)
         
@@ -107,25 +165,13 @@ class TopGamesStreamsFeedViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
         
-        streamsCollectionView.register(TwitchGameCell.self, forCellWithReuseIdentifier: "cellId")
+        streamsCollectionView.register(GameCell.self, forCellWithReuseIdentifier: "cellId")
         
         let layout = streamsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: view.frame.width - 48, height: 180)
         layout.minimumLineSpacing = 24
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
         layout.scrollDirection = .vertical
-    }
-    
-    private func configureDotViewButton() {
-        dotButtonView.onTap = { [weak self] in
-            self?.toggleMenu()
-        }
-        
-        streamsCollectionViewContainerView.addSubview(dotButtonView)
-        dotButtonView.snp.makeConstraints { make in
-            make.leading.equalTo(streamsCollectionViewContainerView.snp.leading).offset(24)
-            make.top.equalTo(streamsCollectionViewContainerView.snp.topMargin)
-            make.size.equalTo(18)
-        }
     }
     
     // MARK: Slide Menu methods
@@ -137,28 +183,28 @@ class TopGamesStreamsFeedViewController: UIViewController {
         case .began, .changed:
             dragMenuWidth += translationX
             dragMenuWidth = max(0, dragMenuWidth)
-            dragMenuWidth = min(200, dragMenuWidth)
+            dragMenuWidth = min(250, dragMenuWidth)
             
             resizeMenu(dragMenuWidth)
             
             sender.setTranslation(.zero, in: sender.view)
         case .ended:
             if self.isMenuExpanded {
-                let dismissedByVelocity = velocityX <= -200
-                let dismissedByFractionCompleted = dragMenuWidth <= 200 * 0.75
+                let dismissedByVelocity = velocityX <= -250
+                let dismissedByFractionCompleted = dragMenuWidth <= 250 * 0.75
                 
                 if dismissedByVelocity || dismissedByFractionCompleted {
                     self.isMenuExpanded = false
                 }
             } else {
-                let presentedByVelocity = velocityX >= 200
-                let presentedByFractionCompleted = dragMenuWidth >= 200 * 0.25
+                let presentedByVelocity = velocityX >= 250
+                let presentedByFractionCompleted = dragMenuWidth >= 250 * 0.25
                 if presentedByVelocity || presentedByFractionCompleted {
                     self.isMenuExpanded = true
                 }
             }
             
-            dragMenuWidth = self.isMenuExpanded ? 200 : 0
+            dragMenuWidth = self.isMenuExpanded ? 250 : 0
             resizeMenu(dragMenuWidth)
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options:  [.curveEaseInOut, .beginFromCurrentState, .allowUserInteraction], animations: {
@@ -196,27 +242,7 @@ class TopGamesStreamsFeedViewController: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: { isCompleted in
             self.isMenuExpanded = !self.isMenuExpanded
-            self.dragMenuWidth = self.isMenuExpanded ? 200 : 0
+            self.dragMenuWidth = self.isMenuExpanded ? 250 : 0
         })
     }
-}
-
-// MARK: UITableViewDataSource
-
-extension TopGamesStreamsFeedViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        slideMenuItems.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! SlideMenuItemCell
-        cell.setup(slideMenuItems[indexPath.row])
-        return cell
-    }
-}
-
-// MARK: UITableViewDelegate
-
-extension TopGamesStreamsFeedViewController: UITableViewDelegate {
-    // TODO: perform onClick events
 }

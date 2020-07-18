@@ -11,5 +11,7 @@ target 'TwitchGamesFeed' do
   pod 'RxCocoa'
   pod 'Alamofire'
   pod 'Nuke'
-
+  pod 'DITranquillity'
+  pod 'NVActivityIndicatorView'
+  pod 'RealmSwift'
 end

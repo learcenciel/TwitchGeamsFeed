@@ -7,29 +7,38 @@
 //
 
 import Foundation
+import RxRelay
 import RxSwift
 
 class TopGamesStreamsFeedViewModel {
-    
-    private let apiManager = TwitchAPI(httpClient: HTTPClient())
     
     enum TopGamesStreamsFeedError {
         case parseError(String)
     }
     
-    let topGames: PublishSubject<[TwitchGame]> = PublishSubject()
-    let loading: PublishSubject<Bool> = PublishSubject()
-    let error: PublishSubject<TopGamesStreamsFeedError> = PublishSubject()
-    
+    private let apiManager: TwitchAPI
     private let disposable = DisposeBag()
+    let databaseManager: DatabaseManager
+    
+    init(apiManager: TwitchAPI,
+         databaseManager: DatabaseManager) {
+        self.apiManager = apiManager
+        self.databaseManager = databaseManager
+    }
+    
+    let slideMenuItems: BehaviorRelay<[SlideMenuItemType]> = BehaviorRelay(value: [])
+    let slideMenuItemTapped: PublishSubject<SlideMenuItemType> = PublishSubject()
+    let topGames: BehaviorRelay<[GameResponse]> = BehaviorRelay(value: [])
+    let gameTapped: PublishSubject<GameResponse> = PublishSubject()
+    let error: PublishSubject<TopGamesStreamsFeedError> = PublishSubject()
+    var isLoading: Bool = false
     
     func fetchGamesList() {
-        self.loading.onNext(true)
-        apiManager.fetchTopGames(parameters: nil) { result in
-            self.loading.onNext(false)
+        apiManager.fetchTopGames { result in
             switch result {
             case .success(let twitchGames):
-                self.topGames.onNext(twitchGames.data)
+                self.topGames.accept(twitchGames.games)
+                self.isLoading = false
             case .failure(let err):
                 self.error.onNext(.parseError(err.localizedDescription))
             }
