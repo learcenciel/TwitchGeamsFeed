@@ -29,6 +29,12 @@ class FavoriteGamesFeedViewController: UIViewController {
         configureStreamsCollectionView()
         configureBindings()
         favoriteGamesFeedViewModel?.fetchGamesList()
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateGame(_:)), name: .didUpdateGame, object: nil)
+    }
+    
+    deinit {
+        print(124)
+        NotificationCenter.default.removeObserver(self, name: .didUpdateGame, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,8 +64,8 @@ class FavoriteGamesFeedViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .bind(to: self.twitchGames)
             
-        disposeBag += twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId", cellType: GameCell.self)) { row, game, cell in
-            cell.isFavorite = self.favoriteGamesFeedViewModel!.databaseManager.isFavorite(gameResponse: game)
+        disposeBag += twitchGames.bind(to: streamsCollectionView.rx.items(cellIdentifier: "cellId1", cellType: GameCell.self)) { [weak self] row, game, cell in
+            cell.isFavorite = self!.favoriteGamesFeedViewModel!.databaseManager.isFavorite(gameResponse: game)
             cell.twitchGame = game
             cell.onFavoriteChanged = { [weak self] isFavorite in
                 isFavorite ?
@@ -73,6 +79,10 @@ class FavoriteGamesFeedViewController: UIViewController {
         })
     }
     
+    @objc func didUpdateGame(_ notification: Notification) {
+        self.favoriteGamesFeedViewModel?.fetchGamesList()
+    }
+    
     private func configureStreamsCollectionView() {
         self.view.addSubview(streamsCollectionView)
         
@@ -84,7 +94,7 @@ class FavoriteGamesFeedViewController: UIViewController {
             make.leading.trailing.bottom.equalToSuperview()
         }
         
-        streamsCollectionView.register(GameCell.self, forCellWithReuseIdentifier: "cellId")
+        streamsCollectionView.register(GameCell.self, forCellWithReuseIdentifier: "cellId1")
         
         let layout = streamsCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: view.frame.width - 48, height: 180)

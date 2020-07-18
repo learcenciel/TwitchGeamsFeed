@@ -31,8 +31,9 @@ class FavoriteGamesFeedCoordinator: NSObject, Coordinator {
     }
     
     func start() {
+        self.navigationController?.delegate = self
         self.favoriteGamesFeedViewController.favoriteGamesFeedViewModel = self.favoriteGamesFeedViewModel
-        self.favoriteGamesFeedViewModel.gameTapped.subscribe(onNext: { gameResponse in
+        self.favoriteGamesFeedViewModel.gameTapped.subscribe(onNext: { [unowned self] gameResponse in
             let topGamesFeedCoordinator =
                 self.instantiateTwitchStreamsFeedCoordinator(with: gameResponse.game.name,
                                                              streamType: .gameCategory(gameResponse.game.name))

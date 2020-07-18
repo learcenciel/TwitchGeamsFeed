@@ -76,15 +76,15 @@ class TopGamesFeedCoordinator: Coordinator {
     
     private func insantiateTwitchSearchFeedCoordinator(with title: String) -> SearchFeedCoordinator {
         let twitchSearchFeedCoordinator: SearchFeedCoordinator = *self.container
-        twitchSearchFeedCoordinator.navigationController = self.navigationController
         twitchSearchFeedCoordinator.twitchSearchFeedViewController.title = title
+        twitchSearchFeedCoordinator.navigationController = self.navigationController
         return twitchSearchFeedCoordinator
     }
     
     private func instantiateTwitchFavoriteGamesFeedCoordinator(with title: String) -> FavoriteGamesFeedCoordinator {
         let twitchFavoriteGamesFeedCoordinator: FavoriteGamesFeedCoordinator = *self.container
-        twitchFavoriteGamesFeedCoordinator.navigationController = self.navigationController
         twitchFavoriteGamesFeedCoordinator.favoriteGamesFeedViewController.title = title
+        twitchFavoriteGamesFeedCoordinator.navigationController = self.navigationController
         return twitchFavoriteGamesFeedCoordinator
     }
 }

@@ -38,7 +38,9 @@ protocol SearchTypeSegmentedControlDelegate {
 }
 
 protocol SearchCapable: UITableViewDelegate, UITableViewDataSource {
+    var contentOffset: CGPoint { get set }
     func search(query: String, offset: Int)
+    
 }
 
 protocol StreamSearchControllerDelegate {

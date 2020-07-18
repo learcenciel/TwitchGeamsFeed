@@ -68,7 +68,6 @@ class TopGamesStreamsFeedViewController: UIViewController {
         
         topGamesStreamsViewModel?.fetchGamesList()
     }
-    
     // MARK: Views configure methods
     
     private func configureBindings() {

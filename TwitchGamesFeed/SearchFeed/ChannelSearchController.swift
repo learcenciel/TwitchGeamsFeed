@@ -19,6 +19,9 @@ class ChannelSearchController: NSObject {
     private var offset: Int = 0
     private var isDownloading = false
     
+    private var heightDictionary: [IndexPath: CGFloat] = [:]
+    var contentOffset: CGPoint = .zero
+    
     var delegate: ChannelSearchControllerDelegate?
     
     init(twitchAPI: TwitchAPI) {
@@ -50,6 +53,16 @@ class ChannelSearchController: NSObject {
                                                     self.delegate?.didRetreiveChannels()
                                                 }
         }
+    }
+}
+
+extension ChannelSearchController {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        heightDictionary[indexPath] = cell.frame.size.height
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return heightDictionary[indexPath] ?? UITableView.automaticDimension
     }
 }
 

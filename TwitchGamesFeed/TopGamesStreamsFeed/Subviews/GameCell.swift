@@ -83,14 +83,12 @@ class GameCell: UICollectionViewCell {
     @objc func didUpdateGame(_ notification: Notification) {
         guard
             let userInfo = notification.userInfo as? [String: RealmGameNotification],
-            let gameNotification = userInfo["game"]
+            let gameNotification = userInfo["game"],
+            gameNotification.gameId == self.twitchGame.game.id
         else { return }
         
-        if gameNotification.gameId == self.twitchGame.game.id {
-            gameNotification.isFavorite ?
-                self.likeButton.setImage(UIImage(named: "like_on"), for: .normal) :
-                self.likeButton.setImage(UIImage(named: "like_off"), for: .normal)
-        }
+        self.isFavorite = gameNotification.isFavorite
+        self.likeButton.setImage(UIImage(named: self.isFavorite ? "like_on" : "like_off"), for: .normal)
     }
     
     @objc func likeButtonPressed(_ sender: UIButton) {

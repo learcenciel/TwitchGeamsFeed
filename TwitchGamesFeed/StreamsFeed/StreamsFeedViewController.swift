@@ -32,7 +32,7 @@ class StreamsFeedViewController: UIViewController {
     private var offset = 0
     
     var featuredStreamsViewModel: StreamsFeedViewModel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -77,7 +77,7 @@ class StreamsFeedViewController: UIViewController {
         
         disposeBag += featuredStreamsViewModel?.loading
             .skip(1)
-            .subscribe(onNext: { isLoading in
+            .subscribe(onNext: { [unowned self] isLoading in
                 if isLoading {
                     self.footerView.isHidden = false
                     self.footerView.startAnimating()

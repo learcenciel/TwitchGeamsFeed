@@ -18,7 +18,10 @@ class StreamSearchController: NSObject {
     private var offset: Int = 0
     private var isDownloading = false
     
-    var delegate: StreamSearchControllerDelegate?
+    private var heightDictionary: [IndexPath: CGFloat] = [:]
+    var contentOffset: CGPoint = .zero
+    
+    var delegate: StreamSearchControllerDelegate!
     
     init(twitchAPI: TwitchAPI,
          twitchStreamsFeedModelConverter: TwitchStreamsFeedModelConverter) {
@@ -37,6 +40,7 @@ class StreamSearchController: NSObject {
                                                         self.twitchStreamsFeedModelConverter.convertTwitchSearchGameStreamResponse(response)
                                                     self.twitchStreams = convertedModel
                                                     self.delegate?.didRetreiveStreams()
+                                                    print(convertedModel.count)
                                                 }
         }
     }
@@ -55,6 +59,16 @@ class StreamSearchController: NSObject {
                                                     self.delegate?.didRetreiveStreams()
                                                 }
         }
+    }
+}
+
+extension StreamSearchController {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        heightDictionary[indexPath] = cell.frame.size.height
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return heightDictionary[indexPath] ?? UITableView.automaticDimension
     }
 }
 
@@ -81,7 +95,6 @@ extension StreamSearchController: SearchCapable {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId1", for: indexPath) as! StreamCell
         cell.featuredStream = self.twitchStreams[indexPath.row]
-        
         return cell
     }
     

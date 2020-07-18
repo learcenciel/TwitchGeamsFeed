@@ -60,6 +60,7 @@ class SearchFeedViewController: UIViewController {
     
     private var query = ""
     private var offset = 0
+    var yOffset: CGPoint = .zero
     
     // MARK: UIViewController lifecycle
     
@@ -84,6 +85,10 @@ class SearchFeedViewController: UIViewController {
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold),
             NSAttributedString.Key.foregroundColor: UIColor.black
         ]
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -141,7 +146,9 @@ class SearchFeedViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        searchItemsTableView.rowHeight = UITableView.automaticDimension
+
+        //searchItemsTableView.estimatedRowHeight = UITableView.automaticDimension
+        //searchItemsTableView.rowHeight = UITableView.automaticDimension
     }
     
     private func changeDelegateAndDataSource() {
@@ -175,7 +182,6 @@ extension SearchFeedViewController {
 
 extension SearchFeedViewController: StreamSearchControllerDelegate {
     func didRetreiveStreams() {
-        changeDelegateAndDataSource()
         self.searchItemsTableView.reloadData()
     }
     
@@ -188,7 +194,6 @@ extension SearchFeedViewController: StreamSearchControllerDelegate {
 
 extension SearchFeedViewController: ChannelSearchControllerDelegate {
     func didRetreiveChannels() {
-        changeDelegateAndDataSource()
         self.searchItemsTableView.reloadData()
     }
     
@@ -201,6 +206,7 @@ extension SearchFeedViewController: ChannelSearchControllerDelegate {
 
 extension SearchFeedViewController: SearchTypeSegmentedControlDelegate {
     func didSelect(item at: Int) {
+        self.currentSearchController.contentOffset = self.searchItemsTableView.contentOffset
         self.currentSearchController = self.searchControllers[at]
         
         changeDelegateAndDataSource()
@@ -208,5 +214,7 @@ extension SearchFeedViewController: SearchTypeSegmentedControlDelegate {
         self.searchItemsTableView.reloadData()
         
         self.title = SearchType.allCases[at].rawValue
+        self.searchItemsTableView.layoutIfNeeded()
+        self.searchItemsTableView.setContentOffset(self.currentSearchController.contentOffset, animated: false)
     }
 }
