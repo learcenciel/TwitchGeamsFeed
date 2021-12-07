@@ -1,5 +1,5 @@
 # TwitchGamesFeed
-MVVM + Coordinator, RxSwift, Realm, SnapKit, Nuke and other tiny libraries to help :)
+MVVM + Coordinator, RxSwift, Realm, SnapKit, Nuke
 
 ![](https://media.giphy.com/media/kEEixquaknBemSQRwF/giphy.gif)
 ![](https://media.giphy.com/media/fUSEly8q9P49WIAMjr/giphy.gif)
